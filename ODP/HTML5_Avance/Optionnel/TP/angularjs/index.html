@@ -1,0 +1,162 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <title>Mon Répertoire</title>
+    <script src="angular.min.js"></script>
+    <style>
+        body{
+            width: 90%;
+            margin: 20px auto ;
+            border: 1px solid black;
+            box-shadow: 0 0 5px black;
+        }
+        input{
+            box-sizing: border-box;
+            padding: 5px;
+            width: 80%;
+            min-height: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+            border: 1px solid #CCC;
+        }
+        label{
+            width: 20%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"]{
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+            transition: box-shadow 1s;
+            -webkit-transition: box-shadow 1s;
+            -mox-transition: box-shadow 1s;
+            -o-transition: box-shadow 1s;
+            -ms-transition: box-shadow 1s;
+            background-color: #942723;
+            color: white;
+        }
+        input[type="submit"]:hover{
+            box-shadow: 0 0 15px rgba(255, 0, 0, 1);
+        }
+
+        body>header{
+            text-align: center;
+            color: white;
+            background: #942723;
+            background-image: -webkit-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -moz-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -o-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -ms-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            padding: 20px;
+        }
+        hr{
+            clear: both;
+            visibility: hidden;
+            display: block;
+        }
+        #contactList{
+            list-style: none;
+            margin: 10px;
+        }
+        #contactList > li{
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 1px 1px 2px black;
+        }
+        h1{
+            text-shadow: 0 0 10px white;
+        }
+        #contacts{
+            padding: 10px;
+            text-align: center;
+        }
+        #search{
+            float: left;
+            text-align: center;
+        }
+        #sync{
+            float: right;
+            padding: 14px 24px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            background-image: linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -webkit-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -moz-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -o-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -ms-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            box-shadow: 0;
+            transition: box-shadow 1s;
+            -webkit-transition: box-shadow 1s;
+            -mox-transition: box-shadow 1s;
+            -o-transition: box-shadow 1s;
+            -ms-transition: bo$httpx-shadow 1s;
+            border-radius: 10px;
+        }
+        #sync:hover{
+            box-shadow: 0 0 10px black;
+        }
+        #editContact{
+            width: 30%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid black;
+            box-shadow: 0 0 2px black;
+        }
+    </style>
+    <script>
+        function contact($scope, $http){
+            $scope.contacts = [];
+            $scope.addContact = function(){
+                $scope.contacts.push($scope.editContact);
+                $scope.editContact = {};
+            }
+            $scope.sync = function(){
+                $http.post('/contacts',JSON.stringify($scope.contacts)).success(function(data){
+                    $scope.contacts = data;
+                });
+            }
+        }
+    </script>
+</head>
+<body ng-controller="contact">
+<header>
+    <h1>Mon répertoire</h1>
+</header>
+<section id="contacts">
+
+    <div id="search" class="formLine">
+        <label>Rechercher:</label>
+        <input type="search" ng-model="search"/>
+    </div>
+
+    <a href="#" id="sync" ng-click="sync()">Sync with server</a>
+
+    <hr/>
+
+    <ul id="contactList">
+        <li ng-repeat="contact in contacts|filter:search">{{contact.nom}}, {{contact.prenom}}
+            <span ng-show="contact.tel">({{contact.tel}})</span>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <form id="editContact" ng-model="editContact" ng-submit="addContact()">
+        <h2>Ajouter un contact</h2>
+        <label>Nom: </label>
+        <input type="text" name="nom" ng-model="editContact.nom" required/>
+        <br/>
+        <label>Prenom: </label>
+        <input type="text" name="prenom" ng-model="editContact.prenom" required/>
+        <br/>
+        <label>Tel: </label>
+        <input type="tel" name="tel" ng-model="editContact.tel">
+        <input type="submit"/>
+    </form>
+
+</section>
+</body>
+</html>

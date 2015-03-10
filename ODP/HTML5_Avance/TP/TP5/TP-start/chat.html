@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>P2P: WebRTC</title>
+
+    <script type="text/javascript" src="scripts/polyfill-webrtc.js"></script>
+    <script type="text/javascript" src="scripts/signal-channel.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        h2 {
+            border-bottom: 1px solid silver;
+            margin: 10px 0;
+        }
+
+        .videos {
+            box-sizing: border-box;
+            width: 32%;
+            display: inline-block;
+            text-align: center;
+
+            background: #f2f2f2;
+            box-shadow: 0 0 5px black;
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        section {
+            box-sizing: border-box;
+            width: 62%;
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        textarea {
+            color: #442640;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            height: 10em;
+            padding: 1em;
+        }
+
+        .vid-container {
+            position: relative;
+        }
+
+        #vid1 {
+            width: 100%;
+            background: #f2f2f2;
+            box-shadow: 0 0 5px black;
+            border: 1px solid black;
+            margin: auto;
+        }
+
+        #vid2 {
+            position: absolute;
+            right: 10px;
+            bottom: 15px;
+            width: 40%;
+            background: transparent;
+            opacity: 0.3;
+            box-shadow: 0 0 5px black;
+            border: 1px solid black;
+            margin: auto;
+        }
+
+        .btns-container {
+            padding: 10px;
+        }
+
+        button {
+            font: 16px sans-serif;
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin-left: 8px;
+        }
+
+        .chat-zone {
+            position: relative;
+            background: #f2f2f2;
+            box-shadow: 0 0 5px black;
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px 10px 50px 10px;
+            max-height: 500px;
+            min-height: 200px;
+        }
+
+        .chat-input {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+        }
+
+        .chat-input > input {
+            width: 90%;
+            border-radius: 5px;
+            padding: 3px 10px;
+        }
+
+        .chat-sender {
+            box-sizing: border-box;
+            display: inline-block;
+            width: 20%;
+            padding: 8px;
+            border: 1px solid black;
+            border-left: 0;
+            background-color: #f4f4f4;
+        }
+
+        .chat-message {
+            box-sizing: border-box;
+            display: inline-block;
+            width: 78%;
+            padding: 8px;
+            border: 1px solid black;
+            border-right: 0;
+            border-left: 0;
+            background-color: #ffffff;
+        }
+
+        .message-self {
+            background-color: #edf7e9;
+        }
+    </style>
+
+</head>
+<body>
+
+<header>
+    <h1>What's Next</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="inscription.html">Inscription</a></li>
+        <li><a href="chat.html">Chat</a></li>
+    </ul>
+</nav>
+
+<section>
+    <div class="chat-zone">
+        <h2>Chat n°<span id="roomId"></span></h2>
+        <div id="chat-history"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="<Enter> to send"/>
+        </div>
+    </div>
+</section>
+<aside class="videos">
+    <h2>Vidéos</h2>
+    <div class="btns-container">
+        <button id="btn-call" onclick="startCall()">Appeler</button>
+        <button id="btn-channel" onclick="startDataChannels()">Ouvrir channel</button>
+    </div>
+    <div class="vid-container">
+        <video id="vid1" autoplay></video>
+        <video id="vid2" autoplay></video>
+    </div>
+</aside>
+
+<footer>
+    <img id="zen_logo" src="ressources/images/logo-zenika.jpg">
+</footer>
+
+<script type="text/javascript">
+
+    var vid1 = document.getElementById('vid1');
+    var vid2 = document.getElementById('vid2');
+    var chat = document.querySelector('#chat-history');
+    var chatInput = document.querySelector('#chat-input');
+    document.querySelector('#roomId').innerText = room;
+    var messageTemplateRemote = "<div class='chat-sender'>${sender}</div><div class='chat-message'>${message}</div>";
+    var messageTemplateLocal = "<div class='chat-sender message-self'>${sender}</div><div class='chat-message'>${message}</div>";
+    chatInput.addEventListener('keydown', function(event) {
+        var key = event.which || event.keyCode;
+        if(key === 13) {
+            var data = {
+                sender: peerId,
+                message: chatInput.value
+            };
+            if (sendChannel && sendChannel.readyState === 'open') {
+                sendChannel.send(JSON.stringify(data));
+                printMessage(data);
+                chatInput.value = "";
+            } else {
+                alert('Le data channel n\'a pas été ouvert ou n\'est pas stable');
+            }
+        }
+    }, false);
+
+
+    var peerConnection;
+    var localstream;
+    var remotestream;
+    var candidates = [];
+    var sendChannel;
+
+
+    var servers = { iceServers: [ {   url: 'stun:stun.l.google.com:19302' } ]}; //Configuration des serveurs STUN et TURN
+    var options = { optional: [ { DtlsSrtpKeyAgreement: true }, { RtpDataChannels: true } ]}; //Options de notre RTCPeerConnection
+    var sdpConstraints = { mandatory: { OfferToReceiveAudio: true, OfferToReceiveVideo: true } };//Définition des contraintes SDP : Session Description Protocol (pour les Offer et Answer)
+
+
+    peerConnection = new RTCPeerConnection(servers, options);
+
+    // TODO 7. ajouter le listener pour écouter les icecandidats détectés et les envoyer via le SignalChannel
+
+    // TODO 6. ajouter le listener pour écouter l'ajout du stream distant et l'assigner à la mini-vidéo
+
+    // TODO 11. ajouter le listener pour recevoir le data channel du peer distant
+
+
+
+    // TODO 1. Utiliser getUserMedia pour obtenir le flux vidéo
+    // TODO 2. Puis utiliser attachMediaStream du polyfill pour lier la vidéo au tag HTML
+
+
+    // TODO 3. Initier un appel audio + video avec le peer distant en envoyant une Offer via le SignalChannel
+
+
+    // TODO 9. Implémenter pour ouvrir un datachannel avec le peer distant : Création du channel et handler d'évènements
+    // TODO 10. Penser à renvoyer une Offer pour mettre à jour si une PeerConntection existe déjà
+    function startDataChannels() {
+        try {
+
+        } catch (e) {
+            alert('Failed to create data channel. You need Chrome M25 or later with RtpDataChannel enabled');
+            console.log('createDataChannel() failed with exception: ' + e.message);
+        }
+    }
+
+    function handleMessage(event, data) {
+        console.log(event + ' received : ' + data);
+
+        switch (event) {
+            case 'offer':
+                // TODO 4. implémenter pour recevoir l'offer et renvoyer l'answer
+                break;
+            case 'answer':
+                // TODO 5. implémenter pour recevoir l'answer
+                break;
+            case 'icecandidate':
+                // TODO 8. implémenter pour recevoir les ice candidates
+                break;
+            default :
+                break;
+        }
+
+    }
+
+
+
+    function printMessage(data) {
+        var template = data.sender === peerId ? messageTemplateLocal : messageTemplateRemote;
+        var htmlMessage = template.replace(/\$\{sender\}/g, data.sender).replace(/\$\{message\}/g, data.message);
+        var messageDiv = document.createElement('div');
+        messageDiv.innerHTML = htmlMessage;
+        chat.appendChild(messageDiv);
+    }
+
+</script>
+</body>
+</html>

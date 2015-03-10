@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Mon agenda</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/loadData.js"></script>
+    <script>
+        var web = 0;
+        var archi = 0;
+        var lang = 0;
+        var outils = 0;
+        var webMax;
+        var archiMax;
+        var langMax;
+        var outilsMax;
+        var anim;
+        function draw(){
+            var canvas=document.getElementById("canvas");
+            if(canvas.getContext){
+                var ctx=canvas.getContext("2d");
+                var total = liste.langage+liste.architecture+liste.web+liste.outils;
+
+                webMax=(liste.web/total)*100;
+                archiMax=(liste.architecture/total)*100;
+                langMax= (liste.langage/total)*100;
+                outilsMax= (liste.outils/total)*100;
+
+                console.log(webMax);
+                ctx.moveTo(50,120);
+                ctx.lineTo(450,120);
+                ctx.stroke();
+
+                ctx.font="20px arial";
+                ctx.fillText("Web",80,145);
+                ctx.fillText("Architecture",148,145);
+                ctx.fillText("Langage",260,145);
+                ctx.fillText("Outils",372,145);
+
+                anim=setInterval(animation,30);
+            }
+        }
+        function animation(){
+            var ctx=document.getElementById("canvas").getContext("2d");
+            ctx.save();
+
+            ctx.fillStyle= "#942723";
+            ctx.fillRect(55,119,90,-web);
+            ctx.fillRect(155,119,90,-archi);
+            ctx.fillRect(255,119,90,-lang);
+            ctx.fillRect(355,119,90,-outils);
+            if(web>=webMax && archi>=archiMax && lang>=langMax && outils>=outilsMax)
+                clearInterval(anim);
+            if(web<webMax)  web++;
+            if(archi<archiMax) archi++;
+            if(lang<langMax)    lang++;
+            if(outils<outilsMax)    outils++;
+
+            ctx.restore();
+        }
+    </script>
+    <style>
+        a#edit{
+            padding: 14px 24px;
+            margin: 10px;
+            color: white;
+            display: inline-block;
+            text-align: right;
+            background: #942723;
+            background-image: -webkit-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -moz-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -o-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -ms-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            box-shadow: 0;
+            transition: box-shadow 1s;
+            -webkit-transition: box-shadow 1s;
+            -mox-transition: box-shadow 1s;
+            -o-transition: box-shadow 1s;
+            -ms-transition: box-shadow 1s;
+            border-radius: 10px;
+        }
+        a#edit:hover{
+            box-shadow: 0 0 10px black;
+        }
+    </style>
+</head>
+<script>
+    function displayEvt(evtId, value, tagId){
+        var article = document.createElement("article");
+        article.setAttribute("id", evtId);
+
+        article.innerHTML = value;
+        //var contenu = document.createTextNode(value);
+        //article.appendChild(contenu);
+        document.getElementById(tagId).appendChild(article);
+    }
+
+</script>
+<body onload="loadDataInAgenda();">
+<header>
+    <h1>What's Next</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="inscription.html">Inscription</a></li>
+    </ul>
+</nav>
+<div style="text-align: center;">
+    <a id="edit" href="agenda-edit.html">Editer agenda</a><br/>
+    <canvas width="500px" height="200px" id="canvas"></canvas>
+</div>
+
+<section id="my_agenda">
+
+</section>
+
+<footer>
+    <img id="zen_logo" src="ressources/images/logo-zenika.jpg">
+</footer>
+
+</body>
+</html>

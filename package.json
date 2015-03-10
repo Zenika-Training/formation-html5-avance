@@ -1,0 +1,15 @@
+{
+  "name": "formation-html5-avance",
+  "version": "0.1.0",
+  "description": "Formation HTML5 avancé",
+  "author": "Zenika",
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/Zenika/formation-html5-avance"
+  },
+  "private": true,
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "zenika-formation-framework": "git+https://github.com/Zenika/Formation--Framework.git#tags/0.3.3"
+  }
+}

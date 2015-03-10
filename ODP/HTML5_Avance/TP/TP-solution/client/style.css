@@ -1,0 +1,108 @@
+html,body,div,span,header,nav,section,article,aside,footer,p,ul,li,a,h1,h2,h3{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    z-index: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body{
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+}
+body>header{
+    text-align: center;
+    color: white;
+    background: #942723;
+    background-image: -webkit-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+    background-image: -moz-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+    background-image: -o-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+    background-image: -ms-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+    padding: 20px;
+}
+h2{
+    text-shadow: 1px 1px 1px #777;
+}
+figure{
+    float: left;
+    border: 1px solid #000000;
+    padding: 1px;
+}
+figcaption{
+    text-align: center;
+}
+nav ul{
+    overflow: auto;
+    background: #4c4c4c;
+    padding-left: 20px;
+    border: 1px solid #000000;
+    box-shadow: 0 0 1px black;
+}
+nav li{
+    float: left;
+    margin: 10px;
+}
+nav li a:hover{
+    color: white;
+    text-shadow: 0px 0px 10px white;
+}
+nav li a{
+    color:  #d2d6d8;
+    text-shadow: 0;
+}
+body>footer{
+    clear: both;
+    text-align: center;
+    color: white;
+    background: #4c4c4c;
+    padding: 20px;
+}
+#articles{
+    clear: both;
+    padding: 20px;
+    width: 80%;
+    float: left;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+article{
+    margin: 0 10px 30px 10px;
+}
+article>header{
+    margin-bottom: 5px;
+}
+article>header>p{
+    font-size: 0.8em;
+    color: #777;
+}
+aside{
+    padding: 20px;
+    float: right;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 20%;
+}
+aside>ul{
+    background:  #f2f2f2;
+    box-shadow: 0 0 5px black;
+    border: 1px solid black;
+}
+aside>ul>li{
+    margin: 10px;
+}
+aside a{
+    color: #4c4c4c;
+}
+aside a:hover{
+    color: #942723;
+    text-decoration: underline;
+}
+
+img#zen_logo{
+    box-shadow: 10px 10px 40px black;
+}

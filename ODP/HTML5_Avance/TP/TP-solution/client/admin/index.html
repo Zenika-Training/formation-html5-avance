@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>Admin page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        section{
+            padding: 5px 20px 5px 20px;
+            border-bottom: 1px solid black;
+        }
+        input, textarea{
+            display: block;
+        }
+        form{
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>What's Next - Admin</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Index</a></li>
+    </ul>
+</nav>
+
+<section>
+    <h2>Tweet</h2>
+    <form action="/admin/" method="post">
+        Pseudo: <input type="text" size="40" name="pseudo"/>
+        Tweet: <textarea cols="40" rows="5" name="tweet"></textarea>
+        <input type="submit" value="Envoyer"/>
+    </form>
+</section>
+
+<footer>
+    <img id="zen_logo" src="../ressources/images/logo-zenika.jpg">
+</footer>
+
+</body>
+</html>

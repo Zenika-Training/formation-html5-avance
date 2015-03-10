@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>IT Experts</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        var form;
+        function openForm(){
+            form = window.open("http://localhost:8080/inscription.html");
+        }
+        window.onmessage = function(event){
+            console.log("onmessage");
+            if(event.origin == "http://localhost:8080")
+                form.postMessage("CODE:IT-EXPERTS-20","http://localhost:8080");
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>IT Experts</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="#">A propos</a></li>
+        <li><a href="#">Nous joindre</a></li>
+
+    </ul>
+</nav>
+
+<section id="articles">
+    <article>
+        <header>
+            <h2>IT Experts partenaire de la what's next!</h2>
+        </header>
+        <p>IT Experts a le plaisir d'annoncer être partenaire de la <a href="localhost:8080">what's next</a>!<br/>
+            Vous pouvez bénéficier d'une réduction dès maintenant en cliquant sur le bouton ci-dessous!<br/>
+            <span id="reductionZone"><a id="reduction" href="#" onclick="openForm()">Je veux une réduction!</a></span>
+        </p>
+    </article>
+</section>
+
+<footer>
+    <h2>Partenaires</h2>
+    <img id="zen_logo" src="logo-zenika.jpg">
+</footer>
+
+</body>
+</html>

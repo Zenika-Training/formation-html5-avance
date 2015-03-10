@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <title>Event Home</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #map{
+            display: none;
+            float: left;
+            width: 80%;
+            text-align: center;
+        }
+        #mapCanvas {
+            margin: 20px auto;
+            border: 1px solid black;
+            width: 500px;
+            height: 300px;
+            box-shadow: 5px 5px 10px #000;
+            -moz-box-shadow: 5px 5px 10px #000;
+            -webkit-box-shadow: 5px 5px 10px #000;
+        }
+
+    </style>
+    <script>
+        function geoloc(){
+            document.getElementById("articles").style.display="none";
+            document.getElementById("map").style.display="block";
+            if(!map)
+                initialize();
+        }
+        function actualites(){
+            document.getElementById("articles").style.display="block";
+            document.getElementById("map").style.display="none";
+        }
+        function initSSE(){
+            if(typeof(EventSource)!=="undefined"){
+                var source=new EventSource("/tweets");
+		source.addEventListener('tweet', function(event){
+                    addTweet(event.data);
+                },false);
+            }
+        }
+        function addTweet(content){
+            var tweetList =document.getElementById('tweets');
+            var entries = tweetList.getElementsByTagName('li');
+
+            var newTweet = document.createElement('li');
+            var content = eval(content);
+            newTweet.innerHTML = "<b style='text-decoration: underline'>"+content.user+"</b>: "+ content.tweet;
+            if(entries.length>=5)
+                tweetList.removeChild(entries[4]);
+            if(entries.length > 0){
+                tweetList.insertBefore(newTweet,entries[0]);
+            }else{
+                tweetList.appendChild(newTweet);
+            }
+        }
+    </script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="scripts/geoloc.js"></script>
+</head>
+<body onload="initSSE();">
+
+<header>
+    <h1>What's Next</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="inscription.html">Inscription</a></li>
+        <li><a href="chat.html">Chat</a></li>
+    </ul>
+</nav>
+
+<section id="articles">
+    <article>
+        <header>
+            <h2>La What's Next débarque sur mobile</h2>
+            <p>Par Souad Hadjiat le 10/05/2011 à 09:00</p>
+        </header>
+        <p>Disponible sur le site <a href="http://www.whatsnextparis.com/mobile/">http://www.whatsnextparis.com/mobile/</a>,
+            l'application permet d'accéder à toutes les informations sur l'évènement: le planning, les conférences, les speakers, les derniers tweets ainsi que les informations pratiques.<br/>
+            Elle est accessible depuis votre navigateur mobile et est compatible avec <strong>Apple iOs</strong>, <strong>Android</strong>, et le dernier <strong>BlackBerry6</strong>. Vous pouvez également la visualiser sur tout navigateur webkit (Chrome, Safari).<br/>
+            <strong>petite astuce :</strong> pour les utilisateur iphone, l'application peut être ajoutée sur l'écran d'accueil pour un affichage en plein écran et un lancement rapide.<br/>
+            Le code source de l'application est disponible sur le <a href="https://github.com/Zenika/Blogs">github de Zenika</a>.</p>
+    </article>
+    <article>
+        <header>
+            <h2>What's Next, What's that?</h2>
+            <p>Par Pierre Queinnec le 25/01/2011 à 09:30</p>
+        </header>
+        <p>Dans ce billet, je reviens sur les raisons d'avoir créé la <a href="http://www.whatsnextparis.com">What's Next</a>, sur le processus de sélection des speakers, et enfin je vais essayer de brosser un portrait rapide des différents intervenants qui nous font l'honneur de venir.<br/>
+        En créant la What's Next, nous avons voulu tout d'abord créer un événement centré sur l'écosystème Java/JVM de grande taille en France. Un événement ouvert à tous, développeurs, architectes, experts. Que chacun puisse revenir avec de nouvelles idées, de nouvelles façons de résoudre les problèmes qui nous sont quotidiennement posés. Un événement où les speakers seraient tous des spécialistes reconnus de leur domaine. Reconnus à raison, pour leur contribution intellectuelle abstraite mais aussi pour sa matérialisation en terme de code. Des spécialistes qui viendraient du monde entier, souvent pour la première fois professionnellement en France, et qui réalisent que nous ne sommes pas uniquement un pays de tourisme, mais que nous avons de plus une communauté Java cultivée et en pleine croissance.<br/>
+        Enfin un événement qui permet à des speakers venus donc spécialement en France de s'exprimer sur leurs spécialités, dans un contexte résolument axé sur le futur proche. Que deviendront nos technologies à court et moyen terme? Comment comprendre les visions de chacun des grands acteurs du monde Java et les buts vers lesquels ils tendent? Des questions complexes, dont les réponses fluctuent au rythme des annonces de chacun des protagonistes. Des questions que se posent semaines après semaines les passionnés, mais aussi tous ceux qui sont en train de faire des choix technologiques.<br/>
+        Pour répondre à cette demande d'information, nous sommes heureux de pouvoir vous présenter la What's Next. Une conférence que nous voulons un peu différente des autres, conviviale et réunissant une bonne partie de la communauté française, avec un accès privilégié à des experts qui ne seraient peut-être jamais venus en France par ailleurs, et qui peut-être ne reviendront pas de sitôt.<br/>
+        Nous avons mis du coeur à l'ouvrage pour pouvoir vous proposer ces grands noms, et faire se rencontrer des leaders de différentes communautés Java, depuis la haute disponibilité, la performance jusqu'aux nouveaux langages de la JVM, Scala, Clojure, en passant par les systèmes NoSQL et l'intégration continue. Si vous voulez vous inscrire, vous pouvez profiter du <a href="inscription.html">tarif early-bird</a>.<br/>
+        See you there!</p>
+    </article>
+    <article>
+        <header>
+            <h2>What's Next... l'événement 2011!</h2>
+            <p>Par Zenika le 22/12/2010 à 09:30</p>
+        </header>
+        <figure>
+            <img src="ressources/images/rex.jpg" alt="rex" height="150px"/>
+            <figcaption>Grand Rex</figcaption>
+        </figure>
+        <p>Zenika organise le <strong>26 et 27 mai 2011</strong> un événement unique en France: <strong>une conférence exceptionnelle de deux jours réunissant les plus grands noms du monde Java/JEE</strong>. Le but de la conférence est d'obtenir la vision de chacun des speakers sur <strong>le futur de leurs technologies</strong> de prédilection.<br/>
+        Pour conserver le suspense, les speakers seront annoncés au fur et à mesure sur le site de la conférence, <a href="index.html">whatsnextparis.com</a>, et sur Twitter <a href="http://twitter.com/WsN_Paris">@WsN_Paris</a>... Stay tuned!<br/>
+        Réservez dès maintenant votre place sur <a href="index.html">whatsnextparis.com</a> et aidez-nous à faire de cet événement une réussite totale. Objectif: renouveler l'événement chaque année!<br/>
+        Et parce qu'il fallait un lieu unique pour faire briller les plus grandes étoiles de notre domaine, la conférence se tiendra au <strong>Grand Rex</strong> à Paris.</p>
+    </article>
+</section>
+
+<div id="map">
+    <button type="button" id="chemin" onclick="requestDirection()" >Go to Zenika</button>
+    <div id="mapCanvas"></div>
+</div>
+
+<aside>
+    <ul>
+        <li><a href="#" onclick="actualites()">Actualités</a></li>
+        <li><a href="#" onclick="geoloc()">Localiser l'évènement</a></li>
+    </ul>
+    <ul id="tweets" style="margin-top: 10px"></ul>
+</aside>
+
+<footer>
+    <img id="zen_logo" src="ressources/images/logo-zenika.jpg">
+</footer>
+
+</body>
+</html>

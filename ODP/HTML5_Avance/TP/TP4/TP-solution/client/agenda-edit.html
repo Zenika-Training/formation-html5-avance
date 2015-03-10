@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My Agenda</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        section{
+            float:left;
+            margin: 2%;
+            width: 46%;
+        }
+        section ul {
+            border: silver solid;
+            min-height: 150px;
+            background: #f2f2f2;
+            padding-bottom: 40px;
+            padding: 10px;
+        }
+        section h2{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        section ul li {
+            background: white;
+            border-radius: 3px;
+        }
+        .draggable{
+            border: 1px solid #942723;
+            box-shadow: inset 0 0 5px #000000;
+            border-radius: 5px;
+            background:   #d2d6d8;
+            display: inline-block;
+            padding: 10px;
+            color: #333;
+            margin: 5px;
+        }
+        
+        section ul li span{
+        	border: 1px solid black;
+			float: right;
+			border-radius: 1em;
+			padding: .2em .4em;
+			text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+			-webkit-box-shadow: rgba(0, 0, 0, 0.5) 0.1em .1em .1em;
+			box-shadow: rgba(0, 0, 0, 0.5) 0 .1em .1em;
+			color: black;
+			background-color: white;
+        }
+
+    </style>
+    <script src="scripts/loadData.js"></script>
+    <script src="scripts/ws.js"></script>
+    <script src="scripts/dragDrop.js"></script>    
+    <script src="scripts/localStorage.js"></script>
+    
+</head>
+<script>
+
+    function displayEvt(evtId, value, categorie, tagId){
+        var puce = document.createElement("li");
+        var id = "talk" + evtId;
+        puce.setAttribute("id", id);
+        puce.setAttribute("class","draggable");
+        puce.setAttribute("draggable", "true");
+        puce.setAttribute("ondragstart","drag(this, event)");
+        puce.setAttribute("data-category", categorie);
+        puce.setAttribute("data-evtid", evtId); //id de l'event qui est utilisé pour envoyer les messages
+        puce.innerHTML = value + " ";
+
+        //todo ajouter un span à "puce" qui va contenir le nombre de places
+        var span = document.createElement("span");
+        puce.appendChild(span);
+
+        document.getElementById(tagId).appendChild(puce);
+    }
+
+</script>
+<body onload="loadData();loadWebSocket();">
+<header>
+    <h1>What's Next</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="inscription.html">Inscription</a></li>
+    </ul>
+</nav>
+<section>
+    <h2>All conferences</h2>
+    <ul id="list_events" ondragover="cancel(event);" ondragenter="cancel(event);" ondrop="drop(this, event);">
+    </ul>
+</section>
+<section>
+    <h2>My conferences</h2>
+    <ul id="my_events" ondragover="cancel(event);" ondragenter="cancel(event);" ondrop="drop(this, event);">
+    </ul>
+</section>
+
+<footer>
+    <img id="zen_logo" src="ressources/images/logo-zenika.jpg">
+</footer>
+<div id="wsStatus" style="display:none;"></div>
+<div style="clear:both;"></div>
+</body>
+</html>

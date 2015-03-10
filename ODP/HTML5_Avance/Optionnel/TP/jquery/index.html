@@ -1,0 +1,184 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Centre Expert</title>
+    <script src="jquery-ui/js/jquery-1.8.3.min.js"></script>
+    <script src="jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <link href="jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet"/>
+    <style>
+        body{
+            width: 90%;
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            box-shadow: 0 0 5px black;
+        }
+        body>header{
+            text-align: center;
+            color: white;
+            background: #942723;
+            background-image: -webkit-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -moz-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -o-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            background-image: -ms-linear-gradient(#F7B0AF,#B12C2A 2%,#771E1C);
+            padding: 20px;
+        }
+        ul{
+            list-style: none;
+        }
+        #trainingList>li{
+            margin-bottom: 5px;
+            padding: 5px;
+        }
+        h2{
+            text-shadow: 1px 1px 1px #777;
+        }
+        body>footer{
+            text-align: center;
+            color: white;
+            height: 100px;
+            background: #4c4c4c;
+            padding: 20px;
+        }
+        #articles{
+            padding: 20px;
+        }
+        article{
+            margin: 0 10px 30px 10px;
+        }
+        .ui-dialog-titlebar-close {
+            visibility: hidden;
+        }
+    </style>
+    <script>
+
+        var resources=[
+            {
+                url: '/blog',
+                callback: refreshBlog
+            },
+            {
+                url: '/trainings',
+                callback: refreshTrainings
+            },
+            {
+                url: 'experts',
+                callback: refreshExperts
+
+            }
+        ];
+
+        function showError(){
+            $('#errorMessage').dialog({
+                modal: true,
+                position: 'center',
+                hide: 'fadeOut',
+                show: 'bounce',
+                buttons:{
+                    'ok': function(){
+                        $(this).dialog('close');
+                    }
+                }
+
+            });
+        }
+
+        function refreshBlog(data){
+            var section=$('<section id="articles">');
+            $.each(data,function(_,item){
+                var article = $('<article>');
+                article.append('<h2>'+item.titre+'</h2>');
+                article.append('<h3>Par '+item.auteur+', le '+item.date+'</h3>');
+                article.append('<p>'+item.article+'</p>');
+                section.append(article);
+            });
+            $('#blog').append(section);
+
+        }
+
+        function refreshTrainings(data){
+            var liste=$('<ul id="trainingList">');
+            $.each(data,function(_,item){
+                var puce = $('<li class="ui-state-default">').html(item.titre+' - '+item.duree+' jours ('+item.categorie+')');
+                liste.append(puce);
+            });
+            $('#formations').append(liste);
+            liste.sortable().disableSelection();
+        }
+
+        function refreshExperts(data){
+            var section=$('<section id="experts">');
+            $.each(data,function(_,item){
+                section.append($('<h3>').html(item.nom));
+                section.append($('<p>').html('societe: '+ item.societe+'<br/>'+
+                        'Spécialités: <br/>'));
+            });
+            $('#experts').append(section);
+            section.accordion();
+        }
+
+        $(function(){
+            $.ajaxSetup({
+                beforeSend: function() {
+                    $('#loader').dialog({
+                        modal: true,
+                        position: 'center',
+                        hide: 'fadeOut',
+                        show: 'bounce',
+                        closeOnEscape: false
+                    });
+
+                },
+                complete: function(){
+                    $('#loader').dialog('close');
+                }
+            });
+
+            $("#tabs").tabs().on('tabsactivate',function(_,ui){
+		ui.index = $(ui.newPanel).index() -1;
+                if($(ui.newPanel).is(':empty'))
+                    $.ajax({
+                        url: resources[ui.index].url,
+                        success: resources[ui.index].callback,
+                        error: showError
+                    });
+
+            });
+            $.ajax({url: resources[0].url, success: resources[0].callback, error: showError});
+        });
+    </script>
+</head>
+<body>
+
+<div id="errorMessage" style="display: none">
+    <p>Oups, une erreur est survenue. Vérifiez la connexion au serveur.</p>
+</div>
+
+<div id="loader" style="display: none">
+    <p>Loading, please wait...</p>
+</div>
+
+<header>
+    <h1>Centre expert</h1>
+</header>
+
+<!-- Tabs -->
+<div id="tabs">
+    <ul>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#formations">Formations</a></li>
+        <li><a href="#experts">Experts</a></li>
+    </ul>
+    <div id="blog"></div>
+    <div id="formations"></div>
+    <div id="experts"></div>
+</div>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

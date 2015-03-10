@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Compute Prime Number</h1>
+
+<button onclick="start()">start</button>
+<button onclick="stop()">Stop</button>
+<div id="result">1</div>
+
+<script>
+  function start() {
+    worker.postMessage(document.getElementById('result').innerHTML);
+  }
+
+  function stop() {
+    worker.terminate();
+    init();
+  }
+	
+  function init(){
+	worker = new Worker('scripts/primeWorker.js');
+
+	worker.addEventListener('message', function(e) {
+	document.getElementById('result').innerHTML = e.data;
+	}, false);
+  }
+  
+  var worker;
+  init();
+  
+</script>
+
+</body>
+</html>

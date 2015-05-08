@@ -1,10 +1,22 @@
-#HTML5 Avancé
+# Web Workers
 
 <!-- .slide: class="page-title" -->
 
 
 
-## Web Workers
+## Plan
+
+<!-- .slide: class="toc" -->
+
+- [Introduction](#/1)
+- [JavaScript](#/2)
+- [AJAX](#/3)
+- [Web Messaging](#/4)
+- [Server Sent Events](#/5)
+- [WebSocket](#/6)
+- [Web RTC](#/7)
+- **[Web Workers](#/8)**
+- [Conclusion](#/9)
 
 Notes :
 
@@ -13,7 +25,7 @@ Notes :
 
 ## Plan
 
-- La multi threading en Javascript 
+- La multi threading en Javascript
 - Pour commencer
 - Limitation
 - Communication
@@ -27,34 +39,29 @@ Notes :
 
 
 
-## La multi threading en Javascript 
-
+## La multi threading en Javascript
 
 - javascript mono thread
 	- On ne peut pas lancer plusieurs script en même temps
 
-- On peut faire de l'asynchronisme 
+- On peut faire de l'asynchronisme
 - setTimeout(), setInterval(), XMLHttpRequest, event handler
 	- Mais ne se lance pas en même temps
 
 - web workers apporte enfin le multi-threading
 	- peut lancer des taches longues sans bloquer la navigation ou les autres scripts
 
-
-
 Notes :
 
 
 
 
-## La multi threading en Javascript 
-
+## La multi threading en Javascript
 
 - Permet de garder l'IHM performante et utilisable par l'utilisateur
 - On ne devrait donc plus trouver ce genre de fenêtre à l'avenir!
 
-- Spécification : http://www.w3.org/TR/workers/ 
-
+- Spécification : http://www.w3.org/TR/workers/
 
 ![](ressources/images/08_webworkers-10000000000001C200000064EF050494.png)
 
@@ -63,8 +70,7 @@ Notes :
 
 
 
-## Pour commencer 
-
+## Pour commencer
 
 - On appel un script worker depuis la page html
 - Création : le constructeur spécifie l'URL du script à lancer
@@ -74,13 +80,12 @@ Notes :
 - Pour arrêter un Worker
 	- Ou depuis le script du worker
 
-
 ```
 var worker = new Worker('task.js');
 ```
 
 ```
-worker.postMessage(); 
+worker.postMessage();
 ```
 
 ```
@@ -96,8 +101,7 @@ Notes :
 
 
 
-## Pour commencer 
-
+## Pour commencer
 
 - Le worker scope
 	- Dans le contexte d'un worker, self et this référencent le scope global du worker
@@ -125,8 +129,7 @@ Notes :
 
 
 
-## Limitation 
-
+## Limitation
 
 - Les workers, à cause de leur comportement multi-thread, ont un accès limité aux fonctionnalités javascript
 - Ils n'ont pas accès:
@@ -142,14 +145,12 @@ Notes :
 	- setTimeout()/clearTimeout() et setInterval()/clearInterval()
 	- Au cache de l'application
 
-
 Notes :
 
 
 
 
-## Communication 
-
+## Communication
 
 - La communication entre le worker et la page parente se fait uniquement par message
 
@@ -173,8 +174,7 @@ Notes :
 
 
 
-## Communication 
-
+## Communication
 
 - Les messages transmis entre la page principale et le worker sont copiés et non partagés.
 
@@ -242,8 +242,7 @@ if (n % i == 0)
 continue search;
 // found a prime!
 postMessage(n);
-}
-```
+}```
 
 Notes :
 
@@ -256,23 +255,18 @@ Notes :
 - L'interface contient:
 	- Filename: le nom du script du worker
 	- Lineno: le numéro de ligne de l'erreur
-	- Message: la description de l'erreur 
-
+	- Message: la description de l'erreur
 
 ```
-<script>
 function onError(e) {
 document.getElementById('error').textContent = [
 'ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message].join('');
-}
-function onMsg(e) {
+}function onMsg(e) {
 document.getElementById('result').textContent = e.data;
-}
-var worker = new Worker('workerWithError.js');
+}var worker = new Worker('workerWithError.js');
 worker.addEventListener('message', onMsg, false);
 worker.addEventListener('error', onError, false);
 worker.postMessage();
-</script>
 ```
 
 Notes :
@@ -280,8 +274,7 @@ Notes :
 
 
 
-## SubWorkers 
-
+## SubWorkers
 
 - On peut lancer des SubWorkers depuis les Workers
 	- Il faut que les SubWorkers aient la même origine que la page parente
@@ -294,8 +287,7 @@ Notes :
 
 
 
-## Shared Web Worker 
-
+## Shared Web Worker
 
 - On a créé uniquement des dedicated Web Worker qui sont liés avec leur créateur (la page parente)
 - Shared web workers autorisent plusieurs scripts à communiquer avec un seul Worker
@@ -320,8 +312,7 @@ Notes :
 
 
 
-## Shared Web Worker 
-
+## Shared Web Worker
 
 - Le worker en javascript
 - Il faut définir la méthode onconnect
@@ -330,16 +321,14 @@ Notes :
 - Les shared Web Worker ne sont pas encore très courants
 	- Support navigateurs : Chrome 4.0+, Safari 5.0+, Opera 10.6+
 
-
 ```
 onconnect = function(e) {
 var port = e.ports[0];
 port.postMessage('Hello World!');
 port.onmessage = function(e) {
 port.postMessage('pong'); //non pas e.ports[0].postMessage
-//ou : e.target.postMessage('pong'); 
-}
-}
+//ou : e.target.postMessage('pong');
+}}
 ```
 
 Notes :
@@ -348,7 +337,6 @@ Notes :
 
 
 ## Cas d'utilisation
-
 
 - Quelques cas d'utilisation possibles pour les workers :
 	- Récupérer et ou mettre en cache des données
@@ -359,48 +347,29 @@ Notes :
 	- Faire des calculs sur la machine cliente
 	- Faire des opérations sur la base de donnée cliente
 
-
-
 Notes :
 
 
 
 
-## Support web workers 
+## Support web workers
 
-
-- Navigateurs 
+- Navigateurs
 	- Firefox 3.5+ (pas de support shared workers)
 	- Chrome 4.0+
 	- Safari 4.0+ (5.0+ pour les shared workers)
 	- Opera 10.6+
-	- IE10 (pas de support shared workers) 
+	- IE10 (pas de support shared workers)
 
-- Tester le support 
-
+- Tester le support
 
 ```
 if (!Worker) {
 console.log("Votre navigateur ne supporte pas les web workers");
-}
-if (!SharedWorker){
+}if (!SharedWorker){
 console.log("Votre navigateur ne supporte pas les shared workers");
 }
-
 ```
-
-Notes :
-
-
-
-
-## TP
-
-
-
-
-
-![](ressources/images/08_webworkers-100002010000015500000155DEE48379.png)
 
 Notes :
 
@@ -409,6 +378,4 @@ Notes :
 
 <!-- .slide: class="page-questions" -->
 
-
-
-<!-- .slide: class="page-tp1" -->
+<!-- .slide: class="page-tp5" -->

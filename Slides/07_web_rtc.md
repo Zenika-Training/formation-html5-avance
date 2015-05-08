@@ -1,13 +1,22 @@
-#HTML5 avancé
+# Web RTC
 
 <!-- .slide: class="page-title" -->
 
 
 
-## WEB RTC
+## Plan
 
+<!-- .slide: class="toc" -->
 
-![](ressources/images/07_web_rtc-100002010000020000000200EB9C62D4.png)
+- [Introduction](#/1)
+- [JavaScript](#/2)
+- [AJAX](#/3)
+- [Web Messaging](#/4)
+- [Server Sent Events](#/5)
+- [WebSocket](#/6)
+- **[Web RTC](#/7)**
+- [Web Workers](#/8)
+- [Conclusion](#/9)
 
 Notes :
 
@@ -48,7 +57,6 @@ Notes :
 	- Adressage unique d'une ip locale à une autre, sans serveur
 	- Sécurité des échanges
 
-
 Notes :
 
 
@@ -57,7 +65,6 @@ Notes :
 ## Support
 
 - Compatibilité
-
 
 ![](ressources/images/07_web_rtc-10000201000003B1000001AD4F7938EB.png)
 
@@ -69,26 +76,14 @@ Notes :
 ## Acronymes et notations
 
 - Peer : Pair participant à une connexion
-	- 
 		- Client, ordinateur, smartphone, …
-
-
-- ICE : Interactive Communication Establishment 
-	- 
+- ICE : Interactive Communication Establishment
 		- Développé par l'IETF – RFC5245
-
-
 - ICE Candidate : Combinaison d'informations de connexion
 - STUN : Session Traversal Utilities for NAT
-	- 
 		- Utilitaire de découverte de son ip et de la configuration réseau pouvant affecter la connexion à un pair
-
-
-- TURN : Traversal Using Relays around NAT 
-	- 
+- TURN : Traversal Using Relays around NAT
 		- Serveur de contournement / relai de NAT
-
-
 
 Notes :
 
@@ -98,23 +93,14 @@ Notes :
 ## Acronymes et notations
 
 - SDP : Session Description Protocol
-	- 
 		- Standard de description de contenu multimédia (résolution, format, codecs...) IETF – RFC 4566
-
-
 - Offer/Answer/Signal Channel : Mise en relation de A et B
-	- 
 		- A souhaite communiquer avec B
 		- A envoie une Offer à B sur un Signal Channel B
 		- B renvoie une Answer contenant une SDP
-
-
 - MediaStream : Flux audio ou video
-	- 
 		- Potentiellement plusieurs canaux
 		- Obtenu via navigator.getUserMedia()
-
-
 
 Notes :
 
@@ -122,7 +108,6 @@ Notes :
 
 
 ## Architecture et Fonctionnement
-
 
 ![](ressources/images/07_web_rtc-10000201000003420000020811EAE053.png)
 
@@ -137,7 +122,6 @@ Notes :
 ## Architecture et Fonctionnement
 
 - Echange de données entre 2 peer
-
 
 ![](ressources/images/07_web_rtc-1000020100000342000002084189EA79.png)
 Signal Channel
@@ -161,7 +145,6 @@ Notes :
 
 ## Architecture et Fonctionnement
 
-
 ![](ressources/images/07_web_rtc-10000201000002E4000001E2EC5DB31F.png)
 
 Notes :
@@ -171,7 +154,7 @@ Notes :
 
 ## Architecture et Fonctionnement
 
-- L'API RTCPeerConnection isole la complexité de tous les traitements effectués par le navigateur et le code sous-jacent : 
+- L'API RTCPeerConnection isole la complexité de tous les traitements effectués par le navigateur et le code sous-jacent :
 	- Gestion des pertes de packets
 	- Suppression de l'écho
 	- Ajustement automatique de la bande passante
@@ -180,7 +163,6 @@ Notes :
 	- Réduction/Suppression du bruit
 	- Nettoyage de l'image
 
-
 Notes :
 
 
@@ -188,13 +170,12 @@ Notes :
 
 ## Architecture et Fonctionnement
 
-- L'API ne gère pas que l'audio et la vidéo. On peut aussi envoyer des données binaires grâce à RTCDataChannel : 
+- L'API ne gère pas que l'audio et la vidéo. On peut aussi envoyer des données binaires grâce à RTCDataChannel :
 	- Possibilité d'avoir plusieurs canaux, priorisés
 	- Sémantique de livraison fiables et peu fiables
 	- Gestion automatique de l'encombrement
 	- Sécurité intégrée
 	- Utilisable avec ou sans l'audio/vidéo
-
 
 Notes :
 
@@ -215,8 +196,8 @@ window.RTCIceCandidate;
 var RTCSessionDescription = window.mozRTCSessionDescription ||
 window.RTCSessionDescription;
 
-var getUserMedia = navigator.getUserMedia || 
-navigator.mozGetUserMedia || 
+var getUserMedia = navigator.getUserMedia ||
+navigator.mozGetUserMedia ||
 navigator.webkitGetUserMedia;
 ```
 
@@ -236,7 +217,7 @@ var pc = new RTCPeerConnection(servers, options);
 var servers = {
 iceServers: [
 {url: "stun:stun.l.google.com:19302"},
-{url: "turn:numb.viagenie.ca", credential: "html5rtc", 
+{url: "turn:numb.viagenie.ca", credential: "html5rtc",
 username: "user@html5.fr"}
 ]};
 
@@ -276,8 +257,7 @@ createDataChannel: Function
 createOffer: Function
 setLocalDescription: Function
 setRemoteDescription: Function
-}
-```
+}```
 
 Notes :
 
@@ -285,7 +265,6 @@ Notes :
 
 
 ## L'API : Initialisation d'une connexion
-
 
 ![](ressources/images/07_web_rtc-10000000000002810000022F36214E1C.png)
 
@@ -296,7 +275,7 @@ Notes :
 
 ## L'API : Création d'une Offer
 
-- Pour se connecter à un peer, il faut créer une Offer et la lui transmettre. Il faut également la définir comme LocalDescription de notre connexion : 
+- Pour se connecter à un peer, il faut créer une Offer et la lui transmettre. Il faut également la définir comme LocalDescription de notre connexion :
 
 ```
 pc.createOffer(function (offer) {
@@ -313,8 +292,7 @@ var constraints = {
 mandatory: {
 OfferToReceiveAudio: true, // demande l'audio
 OfferToReceiveVideo: true // demande la video
-}
-};
+}};
 ```
 
 Notes :
@@ -324,7 +302,7 @@ Notes :
 
 ## L'API : Création d'une Answer
 
-- Lorsque le destinataire reçoit l'offer, il doit la définir comme RemoteDescription puis renvoyer une Answer pour compléter la mise en relation, en se l'assignant comme LocalDescription : 
+- Lorsque le destinataire reçoit l'offer, il doit la définir comme RemoteDescription puis renvoyer une Answer pour compléter la mise en relation, en se l'assignant comme LocalDescription :
 
 ```
 var pc2 = new RTCPeerConnection(servers, options); // peer 2
@@ -370,7 +348,6 @@ Notes :
 
 ## L'API : Recherche d'ICE
 
-
 ![](ressources/images/07_web_rtc-10000000000001E000000320A766E3A0.png)
 
 - Pour se connecter, les peers doivent aussi échanger des informations de connexion
@@ -392,7 +369,7 @@ Notes :
 pc.onicecandidate = function (e) {
 if (e.candidate == null) { return }
 send("candidate", JSON.stringify(e.candidate)); // pseudo-code
-pc.addIceCandidate(new RTCIceCandidate(e.candidate)); 
+pc.addIceCandidate(new RTCIceCandidate(e.candidate));
 };
 ```
 
@@ -413,7 +390,7 @@ var channelOptions = {}; // vide pour l'instant car mal supporté
 channel.onmessage = function(evt){ console.log('message'); };
 
 // Peer 2
-pc.ondatachannel = function(evt){ 
+pc.ondatachannel = function(evt){
 var channel = evt.channel;
 
 channel.onmessage = function(evt){ console.log('message'); };
@@ -535,25 +512,20 @@ video.src = URL.createObjectURL(stream); // Blob URL
 
 Notes :
 
-
-
-
 ## L'API : Audio et Vidéo
 
 - getUserMedia récupère le flux audio/vidéo. Il prend en paramètres des contraintes et 2 callbacks : succès et erreur
 - La communication étant déjà établie via notre peerConnection, Peer 2 doit seulement réagir à l'évènement d'ajout de stream pour le récupérer
 
-```
 // Peer 2
-// Dans la page HTML
+```html
 <video id="mediaViewer2" autoplay></video>
-
-// Dans le javascript
+```
+```javascript
 var video = document.getElementById("mediaViewer2");
 pc2.onaddstream = function (evt) {
 video.src = URL.createObjectURL(evt.stream);
 };
-
 ```
 
 Notes :
@@ -564,31 +536,20 @@ Notes :
 ## L'API : Audio et Vidéo
 
 - Le flux peut également être utilisé par l'API Web Audio, le Canvas, WebGL...
-- L'appel à getUserMedia déclenche l'affichage de la barre d'autorisation proposée à l'utilisateur pour activer le micro / la caméra. Sous certaines conditions, cette demande ne sera faite qu'une fois 
-	- 
+- L'appel à getUserMedia déclenche l'affichage de la barre d'autorisation proposée à l'utilisateur pour activer le micro / la caméra. Sous certaines conditions, cette demande ne sera faite qu'une fois
 		- HTTPS, extensions, …
-
-
 - getUserMedia lancera une erreur si la page n'est pas servie depuis un serveur
-	- 
 		- PERMISSION_DENIED: 1
-
-
 - constraints définit les paramètres audio/vidéo, résolution, ...
 
 Notes :
-
-
-
 
 ## L'API : Audio et Vidéo
 
 - La caméra et le micro ne peuvent pas être utilisés sans l'accord explicite de l'utilisateur
 - Qu'il peut révoquer à tout moment :
 
-
 ![](ressources/images/07_web_rtc-10000201000002AA0000005613B12B50.png)
-
 
 ![](ressources/images/07_web_rtc-10000201000006FC0000032139375464.png)
 
@@ -628,7 +589,7 @@ Notes :
 - Chiffrement des données et flux audio/vidéo par le navigateur
 - Possibilité de rajouter un chiffrement supplémentaire comme OTR
 - Optin explicite pour audio et vidéo (permanent ou simple)
-- Utilisation de protocoles sécurisés : DTLS / SRTP 
+- Utilisation de protocoles sécurisés : DTLS / SRTP
 - Encore beaucoup de discussionsDiscussion complète : http://www.ietf.org/proceedings/82/slides/rtcweb-13.pdf
 
 Notes :
@@ -649,7 +610,6 @@ Notes :
 	- MediaStream à convertir en BlobURL avant de l'assigner à la source d'un élément vidéo
 	- Ne pas démarrer sur un fichier statique car les permissions ne sont pas accordées
 
-
 Notes :
 
 
@@ -657,12 +617,11 @@ Notes :
 
 ## Limitations et Interopérabilité
 
-- Firefox : 
+- Firefox :
 	- Pas de support de TURN pour le moment (29/10/2013)
 	- Une fois qu’une PeerConnection est établie, on ne peut pas en modifier les paramètres
 	- Maximum un flux audio et un video par RTCPeerConnection
 	- API Recording non implémentée
-
 
 Notes :
 
@@ -675,10 +634,7 @@ Notes :
 - API Recording pour enregistrer les flux audio et vidéo (déjà faisable à la main)
 - chrome.tabCapture : partage d'écran
 - Utilisation de techniques de MCU pour communiquer à plusieurs
-	- 
 		- Multipoint Control Unit
-
-
 
 Notes :
 
@@ -689,10 +645,7 @@ Notes :
 
 - chrome://webrtc-internals
 - Polyfill uniformisant les préfixes, disponible via webrtc.org
-	- 
 		- https://code.google.com/p/webrtc/source/browse/trunk/samples/js/base/adapter.js
-
-
 - Wireshark
 - http://www.html5rocks.com/en/tutorials/webrtc/basics/
 - https://bitbucket.org/webrtc/codelab
@@ -707,7 +660,6 @@ Notes :
 
 ## Outils et ressources : webrtc-internals
 
-
 ![](ressources/images/07_web_rtc-10000201000003F20000031A8872338A.png)
 
 Notes :
@@ -716,7 +668,6 @@ Notes :
 
 
 ## Outils et ressources : webrtc-internals
-
 
 ![](ressources/images/07_web_rtc-1000020100000500000002DA9EF222A9.png)
 
@@ -727,7 +678,7 @@ Notes :
 
 ## Limitations et Interopérabilité
 
-- Le reste du monde : 
+- Le reste du monde :
 	- WebRTC peu ou pas supporté
 	- Seules les communications 1-1 sont supportées
 	- Microsoft a proposé une révision du standard
@@ -737,8 +688,6 @@ Notes :
 	- Normalement intéropérable avec d'autres technologies
 		- SIP, Phono, ...
 
-
-
 Notes :
 
 
@@ -746,7 +695,7 @@ Notes :
 
 ## Exemples d'utilisation
 
-- https://apprtc.appspot.com : simple démo audio + vidéo 
+- https://apprtc.appspot.com : simple démo audio + vidéo
 - http://idevelop.ro/ascii-camera/ : flux vidéo transformé en ascii
 - http://shinydemos.com/facekat/ : jeu avec contrôle facial
 - http://webcamtoy.com/app : effets avec WebGL du flux vidéo
@@ -758,26 +707,6 @@ Notes :
 
 
 
-
-
-![](ressources/images/07_web_rtc-1000020100000100000001003A063607.png)
-
-Notes :
-
-
-
-
-
-
-![](ressources/images/07_web_rtc-10000201000001550000015599AA2535.png)
-
-Notes :
-
-
-
-
 <!-- .slide: class="page-questions" -->
 
-
-
-<!-- .slide: class="page-tp1" -->
+<!-- .slide: class="page-tp6" -->

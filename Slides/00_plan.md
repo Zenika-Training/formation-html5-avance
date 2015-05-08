@@ -4,13 +4,6 @@
 
 
 
-## Plan
-
-Notes :
-
-
-
-
 ## Objectifs
 
 - Utiliser les nouvelles fonctionnalités d'AJAX
@@ -24,32 +17,29 @@ Notes :
 
 
 
-## Programme
+## Plan
 
-- Introduction
-- JavaScript : rappels et bonnes pratiques
-- Nouvelles fonctionnalités AJAX
-	- Surveiller l'avancement des opérations
-	- Récupérer et ajouter des fichiers sur le serveur
+<!-- .slide: id="master-toc" class="toc" -->
 
-- Communication
-	- Permettre à vos pages de communiquer
-	- Envoi de notifications en temps réel
-	- Connexion permanente grâce aux WebSockets
-	- Communication en temps réel avec WebRTC
-
-- Performance
-	- Des tâches asynchrones avec les WebWorkers
-
-- Conclusion
+- [Introduction](#/1)
+- [JavaScript](#/2)
+- [AJAX](#/3)
+- [Web Messaging](#/4)
+- [Server Sent Events](#/5)
+- [WebSocket](#/6)
+- [Web RTC](#/7)
+- [Web Workers](#/8)
+- [Conclusion](#/9)
 
 Notes :
 
 
 
 
+## Logistique
+
+* Horaires
+* Déjeuner & pauses
+* Autres questions ?
+
 <!-- .slide: class="page-questions" -->
-
-
-
-<!-- .slide: class="page-tp1" -->

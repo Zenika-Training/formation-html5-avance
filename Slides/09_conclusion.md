@@ -1,10 +1,22 @@
-#HTML5 avancé
+# Conclusion
 
 <!-- .slide: class="page-title" -->
 
 
 
-## Conclusion
+## Plan
+
+<!-- .slide: class="toc" -->
+
+- [Introduction](#/1)
+- [JavaScript](#/2)
+- [AJAX](#/3)
+- [Web Messaging](#/4)
+- [Server Sent Events](#/5)
+- [WebSocket](#/6)
+- [Web RTC](#/7)
+- [Web Workers](#/8)
+- **[Conclusion](#/9)**
 
 Notes :
 
@@ -28,7 +40,6 @@ Notes :
 - Communication bidirectionnelle Client <> Client
 	- Channel Messaging
 
-
 Notes :
 
 
@@ -43,27 +54,25 @@ Notes :
 - Les Spécification ne sont pas finalisées, certaines au stade de draft, d'autres en recommandation
 	- Penser à vérifier l'évolution des spécifications et des implémentations
 
-
 Notes :
 
 
 
 
 ## Pour aller plus loin
-  
+
 Les autres APIs
 
 - Les APIs non abordées
 	- WebIntent : permet de déclarer des intentions. Par exemple, un utilisateur peut vouloir partager une image : le navigateur propose alors divers services pour le faire
 	- Web Notification
 	- Manipulation d'images vectorielles SVG
-	- History API 
+	- History API
 	- Battery status API
 	- Media Capture API
 	- …
 
-
-- http://www.w3.org/TR/ 
+- http://www.w3.org/TR/
 
 Notes :
 
@@ -71,7 +80,7 @@ Notes :
 
 
 ## Pour aller plus loin
-  
+
 Les frameworks
 
 - Frameworks intéressants
@@ -93,15 +102,9 @@ Les frameworks
 		- D3.js
 		- Processing
 
-
-
 Notes :
 
 
 
 
 <!-- .slide: class="page-questions" -->
-
-
-
-<!-- .slide: class="page-tp1" -->

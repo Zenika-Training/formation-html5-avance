@@ -1,10 +1,22 @@
-#HTML5
+# XMLHttpRequest Level 2
 
 <!-- .slide: class="page-title" -->
 
 
 
-## XMLHttpRequest Level 2
+## Plan
+
+<!-- .slide: class="toc" -->
+
+- [Introduction](#/1)
+- [JavaScript](#/2)
+- **[AJAX](#/3)**
+- [Web Messaging](#/4)
+- [Server Sent Events](#/5)
+- [WebSocket](#/6)
+- [Web RTC](#/7)
+- [Web Workers](#/8)
+- [Conclusion](#/9)
 
 Notes :
 
@@ -33,53 +45,41 @@ Notes :
 	- Envoyer des requêtes au serveur Web et charger la réponse dans les scripts
 	- On modifie le DOM du document courant
 	- Pas de rechargement complet de la page
-	- Un rôle important dans le développement Ajax 
+	- Un rôle important dans le développement Ajax
 
 - Cas d'utilisation standard
 	- Récupération de données additionnelles
 	- Envoi de formulaire
 
-
 Notes :
 
-
-
-
 ## L'API XMLHttpRequest
-  
+
 Rappels
 
 - Objet window.XMLHttpRequest
 	- Envoi d'une requête GET
-
-
-- 
 	- Envoi d'une requête POST
+	- État de la requête et réponse
 
-
-- 
-	- État de la requête et réponse 
-
-
-```
+```javascript
 var xhr = new XMLHttpRequest();
 xhr.open('GET','/page.php');
 xhr.send(null);
 ```
 
-```
+```javascript
 var xhr = new XMLHttpRequest();
 xhr.open('POST','/page.php');
 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 xhr.send(data);
 ```
 
-```
+```javascript
 xhr.onreadystatechange = function() {
 if (xhr.readyState==4 && (xhr.status == 200 || xhr.status == 0)) {
-alert(xhr.responseText); // ou xhr.responseXML
-}
-};
+    console.log(xhr.responseText); // ou xhr.responseXML
+}};
 ```
 
 Notes :
@@ -88,21 +88,18 @@ Notes :
 
 
 ## L'API XMLHttpRequest
-  
+
 Limitations
 
 - Envoi de données uniquement en format texte, html, xml
 	- Pas de possibilités d'envoi de fichier
 
-
 - Restriction cross-domain : same origin policy
 	- Pas de requêtes cross-origin
 	- On avait recours à des solutions de contournement comme passer par un serveur proxy, modifier document.domain …
 
-
 - Progression de requête
 	- OnReadyStateChange ne permet pas de connaître la progression de la requête
-
 
 Notes :
 
@@ -116,8 +113,7 @@ Notes :
 - Monitoring du transfert
 - Requête sur différent noms de domaine
 - Sécurité avec les credentials
-
-- Spécification : http://www.w3.org/TR/XMLHttpRequest/ 
+- Spécification : http://www.w3.org/TR/XMLHttpRequest/
 
 Notes :
 
@@ -127,10 +123,10 @@ Notes :
 ## Meilleure gestion des données
 
 - Dans les précédentes implémentations, les données envoyées devaient être sous forme de texte, on recourrait à l'URL-encoding
-- On ne peut pas envoyer/recevoir des données binaires sans hack 
+- On ne peut pas envoyer/recevoir des données binaires sans hack
 - Difficulté d'envoyer des données d'un formulaire
 
-```
+```javascript
 var msg = 'field1=foo&field2=bar';
 var xhr = new XMLHttpRequest();
 xhr.open('POST','/server');
@@ -144,7 +140,7 @@ Notes :
 
 
 ## Meilleure gestion des données
-  
+
 ResponseType
 
 - On peut spécifier le format de réponse
@@ -154,19 +150,17 @@ ResponseType
 
 - xhr.response devient DOMString, ArrayBuffer, Blob, ou Document
 
-```
+```javascript
 var txt = 'data';
 var xhr = new XMLHttpRequest();
 xhr.open('POST', '/server');
 xhr.responseType = 'text';
 xhr.onload = function(e) {
-if (this.status == 200) {
-console.log(this.response);
-}
+    if (this.status == 200) {
+        console.log(this.response);
+    }
 };
 xhr.send(txt);
-
-
 ```
 
 Notes :
@@ -175,7 +169,7 @@ Notes :
 
 
 ## Meilleure gestion des données
-  
+
 FormData
 
 - Envoyer des données clé / valeur avec l'objet FormData
@@ -183,10 +177,7 @@ FormData
 - FormData utilise le type multipart/form-data
 	- L'envoi de fichier est possible
 
-
-
-
-```
+```javascript
 var xhr = new XMLHttpRequest();
 var dataToSend = new FormData(); // créer un objet FromData
 
@@ -205,12 +196,11 @@ Notes :
 
 
 ## Meilleure gestion des données
-  
+
 FormData
 
-- L'entête content-type est ajouté par le navigateur 
+- L'entête content-type est ajouté par le navigateur
 	- Plus besoin de la spécifier
-
 
 ```
 POST /fileUpload HTTP/1.1
@@ -225,7 +215,6 @@ Content-Length: 595843
 Content-Type: multipart/form-data; boundary=---------------------------15329212382
 Pragma: no-cache
 Cache-Control: no-cache
-
 ```
 
 Notes :
@@ -234,32 +223,32 @@ Notes :
 
 
 ## Meilleure gestion des données
-  
+
 FormData
 
 - Si vous avez un formulaire déjà existant dans votre document
 
-```
+```html
 <form id="myform" name="myform" action="/server">
-<input type="text" name="username" value="johndoe">
-<input type="number" name="age" value="40">
-<input type="submit" onclick="return sendForm(this.form);">
+    <input type="text" name="username" value="johndoe">
+    <input type="number" name="age" value="40">
+    <input type="submit" onclick="return sendForm(this.form);">
 </form>
 ```
 
-```
+```javascript
 function sendForm(form) {
-var formData = new FormData(form);
+    var formData = new FormData(form);
 
-formData.append('other_data', '...'); //ajout de données //avant envoi
+    formData.append('other_data', '...'); //ajout de données //avant envoi
 
-var xhr = new XMLHttpRequest();
-xhr.open('POST', form.action, true);
-xhr.onload = function(e) { ... };
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', form.action, true);
+    xhr.onload = function(e) { ... };
 
-xhr.send(formData);
+    xhr.send(formData);
 
-return false; // Pour stopper l'événement submit
+    return false; // Pour stopper l'événement submit
 }
 ```
 
@@ -269,12 +258,12 @@ Notes :
 
 
 ## Transfert de fichier
-  
+
 Download
 
 - Récupérer un fichier du serveur
 	- Blob responses
-	- xhr.responseType = 'blob';
+	- `xhr.responseType = 'blob'`;
 
 - var blobURL = window.URL.createObjectURL(blob);
 	- Créé une String URL qui référence l'objet blob dans le DOM
@@ -299,29 +288,29 @@ Notes :
 
 
 ## Transfert de fichier
-  
+
 Download
 
 - Exemple complet
 
-```
-window.URL = window.URL || window.webkitURL; 
+```javascript
+window.URL = window.URL || window.webkitURL;
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', '/path/to/image.png');
 xhr.responseType = 'blob';
 
 xhr.onload = function(e) {
-if (this.status == 200) {
-var blob = this.response;
+    if (this.status == 200) {
+        var blob = this.response;
 
-var img = document.createElement('img');
-img.onload = function(e) {
-window.URL.revokeObjectURL(img.src); 
-};
-img.src = window.URL.createObjectURL(blob);
-document.body.appendChild(img);
-}
+        var img = document.createElement('img');
+        img.onload = function(e) {
+            window.URL.revokeObjectURL(img.src);
+        };
+        img.src = window.URL.createObjectURL(blob);
+        document.body.appendChild(img);
+    }
 };
 
 xhr.send();
@@ -333,30 +322,29 @@ Notes :
 
 
 ## Transfert de fichier
-  
+
 Download
 
-```
+```javascript
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'doodle.png');
 
 xhr.responseType = 'arraybuffer';
 
 xhr.onload = function(e) {
-if (this.status == 200) {
-var uInt8Array = new Uint8Array(this.response);
-var i = uInt8Array.length;
-var binaryString = new Array(i);
-while (i--)
-{
-binaryString[i] = String.fromCharCode(uInt8Array[i]);
-}
-var data = binaryString.join('');
+    if (this.status == 200) {
+        var uInt8Array = new Uint8Array(this.response);
+        var i = uInt8Array.length;
+        var binaryString = new Array(i);
+        while (i--) {
+            binaryString[i] = String.fromCharCode(uInt8Array[i]);
+        }
+        var data = binaryString.join('');
 
-var base64 = window.btoa(data);
+        var base64 = window.btoa(data);
 
-document.getElementById("myImage").src="data:image/png;base64,"+base64;
-}
+        document.getElementById("myImage").src="data:image/png;base64,"+base64;
+    }
 };
 
 xhr.send();
@@ -368,31 +356,30 @@ Notes :
 
 
 ## Transfert de fichier
-  
+
 Upload
 
 - Upload de fichier
 	- Devient facile avec FormData
 
-- Envoyer un blob ou un file 
+- Envoyer un blob ou un file
 
-```
+```javascript
 function uploadFiles(url, files) {
-var formData = new FormData();
+    var formData = new FormData();
 
-for (var i = 0, file; file = files[i]; ++i) {
-formData.append(file.name, file);
-}
+    for (var i = 0, file; file = files[i]; ++i) {
+        formData.append(file.name, file);
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.onload = function(e) { ... };
 
-var xhr = new XMLHttpRequest();
-xhr.open('POST', url, true);
-xhr.onload = function(e) { ... };
-
-xhr.send(formData); // multipart/form-data
+    xhr.send(formData); // multipart/form-data
 }
 ```
 
-```
+```javascript
 xhr.send(new Blob(['hello world'], {type: 'text/plain'}));
 ```
 
@@ -402,23 +389,21 @@ Notes :
 
 
 ## Transfert de fichier
-  
+
 Upload
 
-- Envoyer des bytes ( Arraybuffer )
+- Envoyer des bytes ( `Arraybuffer` )
 
-
-```
+```javascript
 function sendArrayBuffer() {
-var xhr = new XMLHttpRequest();
-xhr.open('POST', '/server', true);
-xhr.onload = function(e) { ... };
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/server', true);
+    xhr.onload = function(e) { ... };
 
-var uInt8Array = new Uint8Array([1, 2, 3]);
+    var uInt8Array = new Uint8Array([1, 2, 3]);
 
-xhr.send(uInt8Array.buffer);
-}
-```
+    xhr.send(uInt8Array.buffer);
+}```
 
 Notes :
 
@@ -441,71 +426,59 @@ Notes :
 
 Notes :
 
-
-
-
 ## Monitoring du transfert
 
 - Suivre l'évolution d'un upload
-- xhr.upload.onprogress
+- `xhr.upload.onprogress`
+- Pour suivre un download utiliser `xhr.onprogress`
 
-- Pour suivre un download utiliser xhr.onprogress
-
-```
+```html
 <progress min="0" max="100" value="0">0% complete</progress>
 ```
 
-```
+```javascript
 // Listen to the upload progress.
 var progressBar = document.querySelector('progress');
 xhr.upload.onprogress = function(e) {
 if (e.lengthComputable) {
 progressBar.value = (e.loaded / e.total) * 100;
-progressBar.textContent = progressBar.value; 
-}
-};
+progressBar.textContent = progressBar.value;
+}};
 ```
 
 Notes :
-
-
-
 
 ## Gestion du timeout
 
 - Si une requête met trop de temps à s'exécuter, que faire?
 - On peut définir un timeout et un handler sur une requête
 
-
-```
+```javascript
 xhr.timeout = 3000;
 xhr.ontimeout = onTimeOutHandler;
 ```
 
-```
+```javascript
 var onTimeOutHandler = function(event){
-// afficher un message
+    // afficher un message
 
-// renvoyer la requête
-event.target.open('GET','data.json');
+    // renvoyer la requête
+    event.target.open('GET','data.json');
 
-// On peut définir un timeout plus long
-event.target.timeout = 6000;
-event.target.send();
+    // On peut définir un timeout plus long
+    event.target.timeout = 6000;
+    event.target.send();
 }
 ```
 
 Notes :
-
-
-
 
 ## Cross Origin Resource Sharing (CORS)
 
 - La précédente version du XHR limitait les requêtes aux mêmes origines : protocoles (http, https), nom de domaine et port
 - XMLHttpRequest 2 supporte les requêtes cross-origin
 - Le navigateur web ajoute un origin header lors d'une XHR
-	- Ne peut pas être définie ou modifié par setRequestHeader()
+	- Ne peut pas être définie ou modifié par `setRequestHeader()`
 
 - Sur le serveur on peut ajouter un header pour activer CORS:
 - Pour accepter toutes les requêtes :
@@ -525,30 +498,21 @@ xhr.open('GET','http://other.server/path/script');
 
 Notes :
 
-
-
-
 ## Cross Origin Resource Sharing (CORS)
 
 - Exemple serveur php
 - Exemple serveur avec nodeJS
 
-```
+```php
 <?php
 header("Access-Control-Allow-Origin: *");
-
 ```
 
-```
-
+```javascript
 headers["Access-Control-Allow-Origin"] = "*";
-
 ```
 
 Notes :
-
-
-
 
 ## CORS with credentials
 
@@ -566,11 +530,8 @@ Notes :
 
 Notes :
 
-
-
-
 ## XMLHttpRequest 2
-  
+
 Support
 
 - Navigateurs
@@ -582,14 +543,14 @@ Support
 
 - Tester le support
 
-```
+```javascript
 var xhr = new XMLHttpRequest();
 if (typeof xhr.withCredentials === undefined &&
-typeof xhr.responseType === undefined && 
-typeof xhr.upload){ //... (tester toutes les proprietés)
-//le navigateur ne supporte pas
+    typeof xhr.responseType === undefined &&
+    typeof xhr.upload){ //... (tester toutes les proprietés)
+        //le navigateur ne supporte pas
 } else {
-//...
+    //...
 }
 ```
 
@@ -598,19 +559,6 @@ Notes :
 
 
 
-## TP
-
-
-
-![](ressources/images/03_xmlhttprequest-1000020100000155000001559C5E5829.png)
-
-Notes :
-
-
-
-
 <!-- .slide: class="page-questions" -->
-
-
 
 <!-- .slide: class="page-tp1" -->

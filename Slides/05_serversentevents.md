@@ -247,6 +247,9 @@ source.onmessage = function(event) {
 
 Notes :
 
+
+
+
 ## EventSource
 
 Exemple PHP
@@ -274,6 +277,9 @@ sendMsg($serverTime, 'server time: ' . date("h:i:s", time()));
 ```
 
 Notes :
+
+
+
 
 ## EventSource
 

@@ -82,7 +82,6 @@ Notes :
 
 
 
-
 ## Le protocole websocket
 
 - Suite au handshake, le protocole websocket est établi et l'échange de données peut commencer
@@ -146,7 +145,6 @@ WebSocket implements EventTarget;
 ```
 
 Notes :
-
 
 
 

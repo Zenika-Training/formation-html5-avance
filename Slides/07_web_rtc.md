@@ -512,6 +512,9 @@ video.src = URL.createObjectURL(stream); // Blob URL
 
 Notes :
 
+
+
+
 ## L'API : Audio et Vidéo
 
 - getUserMedia récupère le flux audio/vidéo. Il prend en paramètres des contraintes et 2 callbacks : succès et erreur
@@ -543,6 +546,9 @@ Notes :
 - constraints définit les paramètres audio/vidéo, résolution, ...
 
 Notes :
+
+
+
 
 ## L'API : Audio et Vidéo
 

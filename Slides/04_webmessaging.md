@@ -148,26 +148,26 @@ Notes :
 - Exemple : envoi de message entre une page et une iframe
 
 ```html
-//document A at http://domainA.com
-<iframe id="iframeB" src="http://domainB.com/B.html" onload="sendCommand();"></iframe>
+    //document A at http://domainA.com
+    <iframe id="iframeB" src="http://domainB.com/B.html" onload="sendCommand();"></iframe>
 
-<script>
-function sendCommand() {
-    var iframeB = document.getElementById("iframeB");
-    iframeB.contentWindow.postMessage("Hello iframeB", "http://domainB.com");
-}
-</script>
+    <s cript>
+    function sendCommand() {
+        var iframeB = document.getElementById("iframeB");
+        iframeB.contentWindow.postMessage("Hello iframeB", "http://domainB.com");
+    }
+    </s cript>
 ```
 
 ```html
-//document B at http://domainB.com
-<script>
-window.onmessage = function(event) {
-    if(event.origin == 'http://domainA.com'){
-        alert(event.data); //="Hello iframeB"
+    //document B at http://domainB.com
+    <s cript>
+    window.onmessage = function(event) {
+        if(event.origin == 'http://domainA.com'){
+            alert(event.data); //="Hello iframeB"
+        }
     }
-}
-</script>
+    </s cript>
 ```
 
 Notes :
@@ -309,8 +309,8 @@ Notes :
 
 - Lorsqu'on crée le « MessageChannel », il en résulte deux ports non reliés.
 	- Un reste local, l'autre est envoyé au contexte destinataire
-	- On appel start() pour ouvrir le port et activer la réception de messages
-	- La méthode close() ferme le port et coupe le canal de communication
+	- On appel `start()` pour ouvrir le port et activer la réception de messages
+	- La méthode `close()` ferme le port et coupe le canal de communication
 	- Les deux ports communiquent avec postMessage
 	- On utilise la méthode onMessage() pour écouter
 
@@ -339,7 +339,7 @@ Support et état de spécification
 	- Seul Chrome semble la supporter correctement, Opera et Safari ont un support partiel.
 
 - Tester le support :
-	- Définition de window.MessageChannel
+	- Définition de `window.MessageChannel`
 	- L’existence des ports suite à la création du channel ; l'envoi d'un des ports et sa bonne réception
 
 ```javascript

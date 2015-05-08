@@ -158,7 +158,7 @@ Notes :
 
 ```
 //dans la page html
-<script>
+<s cript>
 var worker = new Worker('worker.js');
 
 worker.addEventListener('message', function(event) {
@@ -166,7 +166,7 @@ console.log("Called back by the worker!\n");
 }, false);
 
 worker.postMessage(""); // envoi de message au worker
-</script>
+</s cript>
 ```
 
 Notes :
@@ -205,7 +205,7 @@ Notes :
 
 - La page principale
 
-```
+```html
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -213,12 +213,12 @@ Notes :
 </head>
 <body>
 <p>The highest prime number discovered so far is: <output id="result"></output></p>
-<script>
+<s cript>
 var worker = new Worker('worker.js');
 worker.onmessage = function (event) {
 document.getElementById('result').textContent =  event.data;
 };
-</script>
+</s cript>
 </body>
 </html>
 ```
@@ -230,7 +230,7 @@ Notes :
 
 ## Exemple
 
-- worker.js
+- `worker.js`
 - On calcule et affiche des nombres premiers sans bloquer l'IHM
 
 ```

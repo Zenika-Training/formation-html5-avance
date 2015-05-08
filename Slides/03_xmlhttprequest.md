@@ -53,6 +53,9 @@ Notes :
 
 Notes :
 
+
+
+
 ## L'API XMLHttpRequest
 
 Rappels
@@ -99,7 +102,7 @@ Limitations
 	- On avait recours à des solutions de contournement comme passer par un serveur proxy, modifier document.domain …
 
 - Progression de requête
-	- OnReadyStateChange ne permet pas de connaître la progression de la requête
+	- `OnReadyStateChange` ne permet pas de connaître la progression de la requête
 
 Notes :
 
@@ -426,6 +429,9 @@ Notes :
 
 Notes :
 
+
+
+
 ## Monitoring du transfert
 
 - Suivre l'évolution d'un upload
@@ -447,6 +453,9 @@ progressBar.textContent = progressBar.value;
 ```
 
 Notes :
+
+
+
 
 ## Gestion du timeout
 
@@ -473,6 +482,9 @@ var onTimeOutHandler = function(event){
 
 Notes :
 
+
+
+
 ## Cross Origin Resource Sharing (CORS)
 
 - La précédente version du XHR limitait les requêtes aux mêmes origines : protocoles (http, https), nom de domaine et port
@@ -498,6 +510,9 @@ xhr.open('GET','http://other.server/path/script');
 
 Notes :
 
+
+
+
 ## Cross Origin Resource Sharing (CORS)
 
 - Exemple serveur php
@@ -514,6 +529,9 @@ headers["Access-Control-Allow-Origin"] = "*";
 
 Notes :
 
+
+
+
 ## CORS with credentials
 
 - Par défaut CORS n'envoie pas les « user credentials »
@@ -529,6 +547,9 @@ Notes :
 - Access-Control-Allow-Credentials header doit être « true »
 
 Notes :
+
+
+
 
 ## XMLHttpRequest 2
 

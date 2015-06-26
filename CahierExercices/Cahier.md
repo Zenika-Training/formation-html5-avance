@@ -1,7 +1,13 @@
+<br><br><br><br><br><br><br><br>
+
 ![Zenika](ressources/images/logo-html5.png)
+
+<br><br><br><br><br><br><br>
 
 # HTML 5 Avancé
 # Cahier de TP
+
+<br><br><br><br><br><br>
 
 ![Zenika](ressources/images/logo-zenika.jpg)
 
@@ -47,7 +53,7 @@ Lorsque le fichier a correctement été envoyé sur le serveur, celui-ci renvoie
 Nous allons nous en servir pour créer un lien hypertexte permettant à l'utilisateur de télécharger l'image (le téléchargement proprement dit sera l'objet de la prochaine section du TP).
 
 Dans la méthode `uploadComplete()` :
- 
+
 - Récupérez le nom du fichier renvoyé par le serveur.
 Astuce : la propriété `target` de l'événement passé en paramètre de la méthode représente l'objet `XHR` courant ; il est donc facile de l'interroger pour récupérer la réponse du serveur.
 - Créez un nouveau lien hypertexte dans la balise `<div id="download">`. Pour l'instant, un clic sur ce lien ne fait qu'afficher le nom du fichier dans une popup ; le véritablement téléchargement sera effectué plus loin.
@@ -325,9 +331,9 @@ L'ouverture d'une communcation vidéo se fait en plusieurs étapes :
 - Demander l'utilisation de la webcam et/ou du micro
 - Ajouter le stream vidéo à la connexion
 - Echanger nos informations de connexion avec le peer distant :
-	- Envoyer une `Offer` au peer distant et attendre sa réponse (l'`offer` doit être assignée comme `localDescription`)
-	- Recevoir l'`Answer` du peer distant et attendre son stream vidéo (l'`offer` doit être assignée comme `remoteDescription` et l'answer comme `localDescription`)
-	- Dans les 2 cas, écouter les ice candidate générés par le navigateur et les envoyer à l'autre peer.
+    - Envoyer une `Offer` au peer distant et attendre sa réponse (l'`offer` doit être assignée comme `localDescription`)
+    - Recevoir l'`Answer` du peer distant et attendre son stream vidéo (l'`offer` doit être assignée comme `remoteDescription` et l'answer comme `localDescription`)
+    - Dans les 2 cas, écouter les ice candidate générés par le navigateur et les envoyer à l'autre peer.
 
 ### DataChannel
 

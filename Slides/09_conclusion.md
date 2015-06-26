@@ -25,19 +25,19 @@ Notes :
 ## Résumé
 
 - Communication Client > Serveur
-	- AJAX
+  - AJAX
 
 - Communication Serveur > Client
-	- Server Sent Events
+  - Server Sent Events
 
 - Communication bidirectionnelle Serveur <> Client
-	- WebSockets
+  - WebSockets
 
 - Communication Client > Client
-	- Cross Document Messaging
+  - Cross Document Messaging
 
 - Communication bidirectionnelle Client <> Client
-	- Channel Messaging
+  - Channel Messaging
 
 Notes :
 
@@ -50,7 +50,7 @@ Notes :
 - Ne pas utiliser les données transmises directement dans des fonctions sensibles (ex : requêtes SQL)
 
 - Les Spécification ne sont pas finalisées, certaines au stade de draft, d'autres en recommandation
-	- Penser à vérifier l'évolution des spécifications et des implémentations
+  - Penser à vérifier l'évolution des spécifications et des implémentations
 
 Notes :
 
@@ -61,13 +61,13 @@ Notes :
 Les autres APIs
 
 - Les APIs non abordées
-	- WebIntent : permet de déclarer des intentions. Par exemple, un utilisateur peut vouloir partager une image : le navigateur propose alors divers services pour le faire
-	- Web Notification
-	- Manipulation d'images vectorielles SVG
-	- History API
-	- Battery status API
-	- Media Capture API
-	- …
+  - WebIntent : permet de déclarer des intentions. Par exemple, un utilisateur peut vouloir partager une image : le navigateur propose alors divers services pour le faire
+  - Web Notification
+  - Manipulation d'images vectorielles SVG
+  - History API
+  - Battery status API
+  - Media Capture API
+  - …
 
 - http://www.w3.org/TR/
 
@@ -80,23 +80,23 @@ Notes :
 Les frameworks
 
 - Frameworks intéressants
-	- Pour la création d'application
-		- Angular.js de Google
-		- Ember.js
-		- Backbonejs
-		- Knockout.js
+  - Pour la création d'application
+    - Angular.js de Google
+    - Ember.js
+    - Backbonejs
+    - Knockout.js
 
-	- Pour la création d'applications mobiles
-		- jQuery mobile
-		- Sencha
-		- Phonegap
+  - Pour la création d'applications mobiles
+    - jQuery mobile
+    - Sencha
+    - Phonegap
 
-	- Pour la manipulation du DOM
-		- jQuery
+  - Pour la manipulation du DOM
+    - jQuery
 
-	- Pour la génération de graphiques
-		- D3.js
-		- Processing
+  - Pour la génération de graphiques
+    - D3.js
+    - Processing
 
 Notes :
 

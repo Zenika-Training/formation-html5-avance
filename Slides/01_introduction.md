@@ -25,9 +25,9 @@ Notes :
 ## HTML5 c'est ...
 
 - De nouvelles balises
-	- Des éléments de structure
-	- Une meilleure sémantique
-	- Formulaires plus intelligent
+    - Des éléments de structure
+    - Une meilleure sémantique
+    - Formulaires plus intelligent
 
 - Des APIs javascript
     - Drag'n'drop
@@ -38,7 +38,7 @@ Notes :
     - Contenu audio et video
 
 - Du CSS3
-	- Animations, ombres, arrondis, transitions, ...
+    - Animations, ombres, arrondis, transitions, ...
 
 Notes :
 
@@ -47,14 +47,14 @@ Notes :
 ## Mais aussi ...
 
 - Les APIs « avancées »
-	- XMLHttpRequest 2
-	- Communication
-		- Web messaging
-		- Websockets
-		- Server sent events
-		- WebRTC
+    - XMLHttpRequest 2
+    - Communication
+        - Web messaging
+        - Websockets
+        - Server sent events
+        - WebRTC
 
-	- Scripts asynchrones ou les web workers
+    - Scripts asynchrones ou les web workers
 
 Notes :
 
@@ -89,8 +89,8 @@ Notes :
 ## Server sent events
 
 - « push » de données depuis le serveur
-	- Basé sur des techniques différentes selon l'implémentation serveur (polling, long polling...)
-	- Notifications temps-réel, streaming, twitter wall, news...
+    - Basé sur des techniques différentes selon l'implémentation serveur (polling, long polling...)
+    - Notifications temps-réel, streaming, twitter wall, news...
 
 www.kaazing.me
 
@@ -105,7 +105,7 @@ Notes :
 ## WebSocket
 
 - Protocole et API de communication temps-réel
-	- Applications collaboratives ou type « réseaux sociaux », cours boursiers, ...
+    - Applications collaboratives ou type « réseaux sociaux », cours boursiers, ...
 
 www.kaazing.me http://mrdoob.com/projects/multiuserpad/
 
@@ -120,7 +120,7 @@ Notes :
 ## WebRTC
 
 - API de communication temps-réel, peer to peer
-	- Echange de flux audio, vidéo et données entre peers, sans intermédiaire, inter-navigateur
+    - Echange de flux audio, vidéo et données entre peers, sans intermédiaire, inter-navigateur
 
 ![](ressources/images/01_introduction-1000000000000190000000E1BC4FFAF0.png)
 
@@ -131,7 +131,7 @@ Notes :
 ## Web workers
 
 - Exécution de scripts en arrière plan (sans bloquer la page)
-	- Calculs complexes, manipulation de contenu multimédia
+    - Calculs complexes, manipulation de contenu multimédia
 
 http://www.html5rocks.com
 
@@ -144,11 +144,11 @@ Notes :
 ## Ressources
 
 - Lire les spécifications :
-	- W3C : http://www.w3.org/TR/
+    - W3C : http://www.w3.org/TR/
 
 - Chercher le support :
-	- www.caniuse.com
-	- www.html5test.com
+    - www.caniuse.com
+    - www.html5test.com
 
 Notes :
 

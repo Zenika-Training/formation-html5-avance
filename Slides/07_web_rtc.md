@@ -44,16 +44,16 @@ Notes :
 
 - Web RTC : Real Time Communication
 - Pourquoi :
-	- Permettre une communication directe entre 2 clients
-	- Pas de plugin – Pas de logiciel tiers
-	- Transparent et Interopérable d'un navigateur à l'autre
-	- Transfert de données, audio et vidéo
-	- VoIP, Peer2Peer, Jeux multi-joueurs, ...
+  - Permettre une communication directe entre 2 clients
+  - Pas de plugin – Pas de logiciel tiers
+  - Transparent et Interopérable d'un navigateur à l'autre
+  - Transfert de données, audio et vidéo
+  - VoIP, Peer2Peer, Jeux multi-joueurs, ...
 
 - Contraintes :
-	- Firewalls et NAT
-	- Adressage unique d'une ip locale à une autre, sans serveur
-	- Sécurité des échanges
+  - Firewalls et NAT
+  - Adressage unique d'une ip locale à une autre, sans serveur
+  - Sécurité des échanges
 
 Notes :
 
@@ -72,14 +72,14 @@ Notes :
 ## Acronymes et notations
 
 - Peer : Pair participant à une connexion
-		- Client, ordinateur, smartphone, …
+    - Client, ordinateur, smartphone, …
 - ICE : Interactive Communication Establishment
-		- Développé par l'IETF – RFC5245
+    - Développé par l'IETF – RFC5245
 - ICE Candidate : Combinaison d'informations de connexion
 - STUN : Session Traversal Utilities for NAT
-		- Utilitaire de découverte de son ip et de la configuration réseau pouvant affecter la connexion à un pair
+    - Utilitaire de découverte de son ip et de la configuration réseau pouvant affecter la connexion à un pair
 - TURN : Traversal Using Relays around NAT
-		- Serveur de contournement / relai de NAT
+    - Serveur de contournement / relai de NAT
 
 Notes :
 
@@ -88,14 +88,14 @@ Notes :
 ## Acronymes et notations
 
 - SDP : Session Description Protocol
-		- Standard de description de contenu multimédia (résolution, format, codecs...) IETF – RFC 4566
+    - Standard de description de contenu multimédia (résolution, format, codecs...) IETF – RFC 4566
 - Offer/Answer/Signal Channel : Mise en relation de A et B
-		- A souhaite communiquer avec B
-		- A envoie une Offer à B sur un Signal Channel B
-		- B renvoie une Answer contenant une SDP
+    - A souhaite communiquer avec B
+    - A envoie une Offer à B sur un Signal Channel B
+    - B renvoie une Answer contenant une SDP
 - MediaStream : Flux audio ou video
-		- Potentiellement plusieurs canaux
-		- Obtenu via navigator.getUserMedia()
+    - Potentiellement plusieurs canaux
+    - Obtenu via navigator.getUserMedia()
 
 Notes :
 
@@ -145,13 +145,13 @@ Notes :
 ## Architecture et Fonctionnement
 
 - L'API RTCPeerConnection isole la complexité de tous les traitements effectués par le navigateur et le code sous-jacent :
-	- Gestion des pertes de packets
-	- Suppression de l'écho
-	- Ajustement automatique de la bande passante
-	- Gestion dynamique d'un tampon des packets
-	- Contrôle automatique du gain
-	- Réduction/Suppression du bruit
-	- Nettoyage de l'image
+  - Gestion des pertes de packets
+  - Suppression de l'écho
+  - Ajustement automatique de la bande passante
+  - Gestion dynamique d'un tampon des packets
+  - Contrôle automatique du gain
+  - Réduction/Suppression du bruit
+  - Nettoyage de l'image
 
 Notes :
 
@@ -160,11 +160,11 @@ Notes :
 ## Architecture et Fonctionnement
 
 - L'API ne gère pas que l'audio et la vidéo. On peut aussi envoyer des données binaires grâce à RTCDataChannel :
-	- Possibilité d'avoir plusieurs canaux, priorisés
-	- Sémantique de livraison fiables et peu fiables
-	- Gestion automatique de l'encombrement
-	- Sécurité intégrée
-	- Utilisable avec ou sans l'audio/vidéo
+  - Possibilité d'avoir plusieurs canaux, priorisés
+  - Sémantique de livraison fiables et peu fiables
+  - Gestion automatique de l'encombrement
+  - Sécurité intégrée
+  - Utilisable avec ou sans l'audio/vidéo
 
 Notes :
 
@@ -512,9 +512,9 @@ Notes :
 
 - Le flux peut également être utilisé par l'API Web Audio, le Canvas, WebGL...
 - L'appel à getUserMedia déclenche l'affichage de la barre d'autorisation proposée à l'utilisateur pour activer le micro / la caméra. Sous certaines conditions, cette demande ne sera faite qu'une fois
-		- HTTPS, extensions, …
+    - HTTPS, extensions, …
 - getUserMedia lancera une erreur si la page n'est pas servie depuis un serveur
-		- PERMISSION_DENIED: 1
+    - PERMISSION_DENIED: 1
 - constraints définit les paramètres audio/vidéo, résolution, ...
 
 Notes :
@@ -574,15 +574,15 @@ Notes :
 ## Limitations et Interopérabilité
 
 - Pour Chrome :
-	- Selon la version, il peut être nécessaire d'activer un flag :
-		- chrome://flags
-		- Enable screen capture support in getUserMedia()
+  - Selon la version, il peut être nécessaire d'activer un flag :
+    - chrome://flags
+    - Enable screen capture support in getUserMedia()
 
-	- Flag nécessaire pour les data channels :
-		- Enable RTCDataChannel / enable-sctp-data-channels
+  - Flag nécessaire pour les data channels :
+    - Enable RTCDataChannel / enable-sctp-data-channels
 
-	- MediaStream à convertir en BlobURL avant de l'assigner à la source d'un élément vidéo
-	- Ne pas démarrer sur un fichier statique car les permissions ne sont pas accordées
+  - MediaStream à convertir en BlobURL avant de l'assigner à la source d'un élément vidéo
+  - Ne pas démarrer sur un fichier statique car les permissions ne sont pas accordées
 
 Notes :
 
@@ -591,10 +591,10 @@ Notes :
 ## Limitations et Interopérabilité
 
 - Firefox :
-	- Pas de support de TURN pour le moment (29/10/2013)
-	- Une fois qu’une PeerConnection est établie, on ne peut pas en modifier les paramètres
-	- Maximum un flux audio et un video par RTCPeerConnection
-	- API Recording non implémentée
+  - Pas de support de TURN pour le moment (29/10/2013)
+  - Une fois qu’une PeerConnection est établie, on ne peut pas en modifier les paramètres
+  - Maximum un flux audio et un video par RTCPeerConnection
+  - API Recording non implémentée
 
 Notes :
 
@@ -606,7 +606,7 @@ Notes :
 - API Recording pour enregistrer les flux audio et vidéo (déjà faisable à la main)
 - chrome.tabCapture : partage d'écran
 - Utilisation de techniques de MCU pour communiquer à plusieurs
-		- Multipoint Control Unit
+    - Multipoint Control Unit
 
 Notes :
 
@@ -616,7 +616,7 @@ Notes :
 
 - chrome://webrtc-internals
 - Polyfill uniformisant les préfixes, disponible via webrtc.org
-		- https://code.google.com/p/webrtc/source/browse/trunk/samples/js/base/adapter.js
+    - https://code.google.com/p/webrtc/source/browse/trunk/samples/js/base/adapter.js
 - Wireshark
 - http://www.html5rocks.com/en/tutorials/webrtc/basics/
 - https://bitbucket.org/webrtc/codelab
@@ -647,14 +647,14 @@ Notes :
 ## Limitations et Interopérabilité
 
 - Le reste du monde :
-	- WebRTC peu ou pas supporté
-	- Seules les communications 1-1 sont supportées
-	- Microsoft a proposé une révision du standard
-		- CU-RTC-Web
+  - WebRTC peu ou pas supporté
+  - Seules les communications 1-1 sont supportées
+  - Microsoft a proposé une révision du standard
+    - CU-RTC-Web
 
-	- Mise à disposition d'un polyfill pour uniformiser l'API
-	- Normalement intéropérable avec d'autres technologies
-		- SIP, Phono, ...
+  - Mise à disposition d'un polyfill pour uniformiser l'API
+  - Normalement intéropérable avec d'autres technologies
+    - SIP, Phono, ...
 
 Notes :
 

@@ -40,14 +40,14 @@ Notes :
 ## La multi threading en Javascript
 
 - javascript mono thread
-	- On ne peut pas lancer plusieurs script en même temps
+  - On ne peut pas lancer plusieurs script en même temps
 
 - On peut faire de l'asynchronisme
 - setTimeout(), setInterval(), XMLHttpRequest, event handler
-	- Mais ne se lance pas en même temps
+  - Mais ne se lance pas en même temps
 
 - web workers apporte enfin le multi-threading
-	- peut lancer des taches longues sans bloquer la navigation ou les autres scripts
+  - peut lancer des taches longues sans bloquer la navigation ou les autres scripts
 
 Notes :
 
@@ -74,7 +74,7 @@ Notes :
 - le script doit avoir la même origine que la page qui l’exécute
 - Pour envoyer un message ou une requête au worker, on utilise postMessage()
 - Pour arrêter un Worker
-	- Ou depuis le script du worker
+  - Ou depuis le script du worker
 
 ```
 var worker = new Worker('task.js');
@@ -99,7 +99,7 @@ Notes :
 ## Pour commencer
 
 - Le worker scope
-	- Dans le contexte d'un worker, self et this référencent le scope global du worker
+  - Dans le contexte d'un worker, self et this référencent le scope global du worker
 
 - Dans le fichier worker
 
@@ -127,17 +127,17 @@ Notes :
 
 - Les workers, à cause de leur comportement multi-thread, ont un accès limité aux fonctionnalités javascript
 - Ils n'ont pas accès:
-	- Au DOM (qui n'est pas thread safe)
-	- À l'objet window
-	- À l'objet document
-	- A l'objet parent
+  - Au DOM (qui n'est pas thread safe)
+  - À l'objet window
+  - À l'objet document
+  - A l'objet parent
 
 - Il ont accès
-	- À l'objet navigator
-	- À l'objet location (en lecture seule)
-	- XMLHttpRequest
-	- setTimeout()/clearTimeout() et setInterval()/clearInterval()
-	- Au cache de l'application
+  - À l'objet navigator
+  - À l'objet location (en lecture seule)
+  - XMLHttpRequest
+  - setTimeout()/clearTimeout() et setInterval()/clearInterval()
+  - Au cache de l'application
 
 Notes :
 
@@ -242,9 +242,9 @@ Notes :
 
 - Quand une erreur apparaît pendant que le worker s'exécute l'événement ErrorEvent est déclenché
 - L'interface contient:
-	- Filename: le nom du script du worker
-	- Lineno: le numéro de ligne de l'erreur
-	- Message: la description de l'erreur
+  - Filename: le nom du script du worker
+  - Lineno: le numéro de ligne de l'erreur
+  - Message: la description de l'erreur
 
 ```
 function onError(e) {
@@ -265,8 +265,8 @@ Notes :
 ## SubWorkers
 
 - On peut lancer des SubWorkers depuis les Workers
-	- Il faut que les SubWorkers aient la même origine que la page parente
-	- L'URL dans le Subworker est résolue relativement au Worker parent
+  - Il faut que les SubWorkers aient la même origine que la page parente
+  - L'URL dans le Subworker est résolue relativement au Worker parent
 
 - Attention : ne pas oublier que les messages sont copiés et non pas partagés. Il ne faut donc pas créer une multitude de workers, cela pourrait demander trop de ressources clientes.
 
@@ -305,7 +305,7 @@ Notes :
 - Il faut passer aussi par la variable port
 
 - Les shared Web Worker ne sont pas encore très courants
-	- Support navigateurs : Chrome 4.0+, Safari 5.0+, Opera 10.6+
+  - Support navigateurs : Chrome 4.0+, Safari 5.0+, Opera 10.6+
 
 ```
 onconnect = function(e) {
@@ -324,13 +324,13 @@ Notes :
 ## Cas d'utilisation
 
 - Quelques cas d'utilisation possibles pour les workers :
-	- Récupérer et ou mettre en cache des données
-	- Mettre en forme du texte
-	- Analyser un flux vidéo ou audio
-	- Faire des opération sur le système de fichier
-	- Ajouter un filtre sur des images
-	- Faire des calculs sur la machine cliente
-	- Faire des opérations sur la base de donnée cliente
+  - Récupérer et ou mettre en cache des données
+  - Mettre en forme du texte
+  - Analyser un flux vidéo ou audio
+  - Faire des opération sur le système de fichier
+  - Ajouter un filtre sur des images
+  - Faire des calculs sur la machine cliente
+  - Faire des opérations sur la base de donnée cliente
 
 Notes :
 
@@ -339,11 +339,11 @@ Notes :
 ## Support web workers
 
 - Navigateurs
-	- Firefox 3.5+ (pas de support shared workers)
-	- Chrome 4.0+
-	- Safari 4.0+ (5.0+ pour les shared workers)
-	- Opera 10.6+
-	- IE10 (pas de support shared workers)
+  - Firefox 3.5+ (pas de support shared workers)
+  - Chrome 4.0+
+  - Safari 4.0+ (5.0+ pour les shared workers)
+  - Opera 10.6+
+  - IE10 (pas de support shared workers)
 
 - Tester le support
 

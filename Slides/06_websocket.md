@@ -38,12 +38,12 @@ Notes :
 
 - Spécification normalisée par l'IETF (Internet Engineering Task Force) dans le RFC 6455
 - Principe :
-	- Communication bi-directionnelle permanente entre un client et un serveur web
-		- Développement d'applications temps-réel
+  - Communication bi-directionnelle permanente entre un client et un serveur web
+    - Développement d'applications temps-réel
 
 - Le protocole est constitué de deux parties
-	- Handshake
-	- Transfert de données
+  - Handshake
+  - Transfert de données
 
 Notes :
 
@@ -52,8 +52,8 @@ Notes :
 ## Le protocole websocket
 
 - Handshake
-	- Requête client
-	- Réponse serveur
+  - Requête client
+  - Réponse serveur
 
 ```
 GET /chat HTTP/1.1
@@ -82,10 +82,10 @@ Notes :
 
 - Suite au handshake, le protocole websocket est établi et l'échange de données peut commencer
 - Les données sont envoyés sous forme de « frame » avec un « mask »
-	- 4 octets choisis aléatoirement par le client forment le mask
-	- Les données sont ensuite « masquées »
-	- La trame envoyées sera sous la forme : mask|données
-	- Le serveur doit ensuite faire une opération XOR entre les données et le mask
+  - 4 octets choisis aléatoirement par le client forment le mask
+  - Les données sont ensuite « masquées »
+  - La trame envoyées sera sous la forme : mask|données
+  - Le serveur doit ensuite faire une opération XOR entre les données et le mask
 
 → assure la sécurité des échange
 
@@ -145,7 +145,7 @@ Notes :
 ## L'API
 
 - Création d'une instance de websocket
-	- Un second argument optionnel définit des sous-protocoles
+  - Un second argument optionnel définit des sous-protocoles
 - Gestion des événements
 - Envoi de données
 - Fermeture de la connexion
@@ -181,13 +181,13 @@ Notes :
 ## L'API
 
 - Etat de la connexion
-	- Attribut readyState
-		- 0 : connecting → connexion en cours
-		- 1 : open → connexion établie
-		- 2 : closed → fermé ou n'a pu être établie
+  - Attribut readyState
+    - 0 : connecting → connexion en cours
+    - 1 : open → connexion établie
+    - 2 : closed → fermé ou n'a pu être établie
 
 - Connexion sécurisée avec wss
-	- Chiffrement TLS/SSL similaire à HTTPS
+  - Chiffrement TLS/SSL similaire à HTTPS
 
 Notes :
 
@@ -198,16 +198,16 @@ Notes :
 Clients
 
 - Navigateurs :
-	- Firefox 6.0+
-	- Chrome 14.0+
-	- Safari 6.0+
-	- IE 10
-	- Opera 12.1
+  - Firefox 6.0+
+  - Chrome 14.0+
+  - Safari 6.0+
+  - IE 10
+  - Opera 12.1
 
 - Tester le support :
 
 - Autres clients et librairies :
-	- Socket.io, websocket-node, jetty, jwebsocket, Kaazing, ...
+  - Socket.io, websocket-node, jetty, jwebsocket, Kaazing, ...
 
 ```javascript
 if (!!window.WebSocket) {
@@ -226,12 +226,12 @@ Notes :
 Serveurs
 
 - Serveur
-	- Java: Jetty, tomcat 7, jwebsocket, GnuWebsocket4J
-	- Javascript: websocket node, socketIO (+nodejs)
-	- Python : pywebsocket
-	- PHP : phpwebsocket
-	- C++ : QtWebsocket
-	- Kaazing
+  - Java: Jetty, tomcat 7, jwebsocket, GnuWebsocket4J
+  - Javascript: websocket node, socketIO (+nodejs)
+  - Python : pywebsocket
+  - PHP : phpwebsocket
+  - C++ : QtWebsocket
+  - Kaazing
 
 Notes :
 
@@ -336,13 +336,13 @@ Notes :
 ## Sécurité et fallback
 
 - Sécurité basée sur les origines
-	- Connexion du serveur à une origine particulière uniquement
+  - Connexion du serveur à une origine particulière uniquement
 
 - Données envoyées « masquées » avec la clé
-	- Empêchent les attaques d'intermédiaires
+  - Empêchent les attaques d'intermédiaires
 
 - Prévoir un fallback
-	- Vers du polling/long-polling si la connexion ne peut être établie
+  - Vers du polling/long-polling si la connexion ne peut être établie
 
 Notes :
 

@@ -40,14 +40,14 @@ Notes :
 ## L'API XMLHttpRequest
 
 - Principe :
-	- Envoyer des requêtes au serveur Web et charger la réponse dans les scripts
-	- On modifie le DOM du document courant
-	- Pas de rechargement complet de la page
-	- Un rôle important dans le développement Ajax
+  - Envoyer des requêtes au serveur Web et charger la réponse dans les scripts
+  - On modifie le DOM du document courant
+  - Pas de rechargement complet de la page
+  - Un rôle important dans le développement Ajax
 
 - Cas d'utilisation standard
-	- Récupération de données additionnelles
-	- Envoi de formulaire
+  - Récupération de données additionnelles
+  - Envoi de formulaire
 
 Notes :
 
@@ -58,9 +58,9 @@ Notes :
 Rappels
 
 - Objet window.XMLHttpRequest
-	- Envoi d'une requête GET
-	- Envoi d'une requête POST
-	- État de la requête et réponse
+  - Envoi d'une requête GET
+  - Envoi d'une requête POST
+  - État de la requête et réponse
 
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -91,14 +91,14 @@ Notes :
 Limitations
 
 - Envoi de données uniquement en format texte, html, xml
-	- Pas de possibilités d'envoi de fichier
+  - Pas de possibilités d'envoi de fichier
 
 - Restriction cross-domain : same origin policy
-	- Pas de requêtes cross-origin
-	- On avait recours à des solutions de contournement comme passer par un serveur proxy, modifier document.domain …
+  - Pas de requêtes cross-origin
+  - On avait recours à des solutions de contournement comme passer par un serveur proxy, modifier document.domain …
 
 - Progression de requête
-	- `OnReadyStateChange` ne permet pas de connaître la progression de la requête
+  - `OnReadyStateChange` ne permet pas de connaître la progression de la requête
 
 Notes :
 
@@ -140,9 +140,9 @@ Notes :
 ResponseType
 
 - On peut spécifier le format de réponse
-	- xhr.responseType
-	- "text", "arraybuffer", "blob", ou "document"
-	- Par défaut "text"
+  - xhr.responseType
+  - "text", "arraybuffer", "blob", ou "document"
+  - Par défaut "text"
 
 - xhr.response devient DOMString, ArrayBuffer, Blob, ou Document
 
@@ -170,7 +170,7 @@ FormData
 - Envoyer des données clé / valeur avec l'objet FormData
 - Donnée envoyée comme dans un formulaire HTML normal
 - FormData utilise le type multipart/form-data
-	- L'envoi de fichier est possible
+  - L'envoi de fichier est possible
 
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -194,7 +194,7 @@ Notes :
 FormData
 
 - L'entête content-type est ajouté par le navigateur
-	- Plus besoin de la spécifier
+  - Plus besoin de la spécifier
 
 ```
 POST /fileUpload HTTP/1.1
@@ -254,11 +254,11 @@ Notes :
 Download
 
 - Récupérer un fichier du serveur
-	- Blob responses
-	- `xhr.responseType = 'blob'`;
+  - Blob responses
+  - `xhr.responseType = 'blob'`;
 
 - var blobURL = window.URL.createObjectURL(blob);
-	- Créé une String URL qui référence l'objet blob dans le DOM
+  - Créé une String URL qui référence l'objet blob dans le DOM
 
 - Les BlobURL sont uniques mais c'est toujours une bonne pratique de les déréférencer.
 
@@ -349,7 +349,7 @@ Notes :
 Upload
 
 - Upload de fichier
-	- Devient facile avec FormData
+  - Devient facile avec FormData
 
 - Envoyer un blob ou un file
 
@@ -471,7 +471,7 @@ Notes :
 - La précédente version du XHR limitait les requêtes aux mêmes origines : protocoles (http, https), nom de domaine et port
 - XMLHttpRequest 2 supporte les requêtes cross-origin
 - Le navigateur web ajoute un origin header lors d'une XHR
-	- Ne peut pas être définie ou modifié par `setRequestHeader()`
+  - Ne peut pas être définie ou modifié par `setRequestHeader()`
 
 - Sur le serveur on peut ajouter un header pour activer CORS:
 - Pour accepter toutes les requêtes :
@@ -514,12 +514,12 @@ Notes :
 ## CORS with credentials
 
 - Par défaut CORS n'envoie pas les « user credentials »
-	- Cookies
-	- HTTP authentication
-	- client-side SSL certificates
+  - Cookies
+  - HTTP authentication
+  - client-side SSL certificates
 
 - Si on veut les envoyer au serveur
-	- xhr.withCredentials = true;
+  - xhr.withCredentials = true;
 
 - Nécessaire seulement pour CORS
 - Access-Control-Allow-Origin header ne contient pas de *
@@ -534,11 +534,11 @@ Notes :
 Support
 
 - Navigateurs
-	- Chrome 7.0+
-	- Firefox 4.0+
-	- Safari 5.0+
-	- Opera 12.0+
-	- IE 10
+  - Chrome 7.0+
+  - Firefox 4.0+
+  - Safari 5.0+
+  - Opera 12.0+
+  - IE 10
 
 - Tester le support
 

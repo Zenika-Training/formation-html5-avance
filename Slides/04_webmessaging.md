@@ -25,15 +25,15 @@ Notes :
 ## Nouvelles méthodes de communication
 
 - Possibilités de partager des données entre documents web de différents contextes de navigation
-	- Environnement du document : onglets, fenêtres, iframes, ...
+  - Environnement du document : onglets, fenêtres, iframes, ...
 
 - Modèle de communication commun
-	- Web messaging
-		- Cross-document messaging
-		- Channel messaging
+  - Web messaging
+    - Cross-document messaging
+    - Channel messaging
 
-	- Server sent events
-	- Web Sockets
+  - Server sent events
+  - Web Sockets
 
 - Spécification : http://www.w3.org/TR/html5/comms.html
 
@@ -44,13 +44,13 @@ Notes :
 ## Nouvelles méthodes de communication → Pourquoi ?
 
 - HTTP : protocole déconnecté
-	- Pour faire du temps réel, on utilise jusque là des solutions de polling ou long polling
-	- Pas de solution de réel « push » entre serveur et client
-		- HTML5 : websocket + Server sent events
+  - Pour faire du temps réel, on utilise jusque là des solutions de polling ou long polling
+  - Pas de solution de réel « push » entre serveur et client
+    - HTML5 : websocket + Server sent events
 
 - Cross-site scripting : sécurité des navigateurs
-	- Les documents de différents domaines ou contextes ne peuvent pas communiquer ou s'affecter
-		- HTML5 : Web messaging
+  - Les documents de différents domaines ou contextes ne peuvent pas communiquer ou s'affecter
+    - HTML5 : Web messaging
 
 Notes :
 
@@ -62,8 +62,8 @@ Notes :
 
 - L'attribut data contient le corps du message
 - Des méthodes sont à disposition pour gérer les messages
-	- postMessage ou send pour envoi
-	- onmessage pour écouter les réceptions
+  - postMessage ou send pour envoi
+  - onmessage pour écouter les réceptions
 
 ```
 interface MessageEvent : Event {
@@ -90,8 +90,8 @@ Notes :
 - But : communication inter contexte et origines
 
 - Deux méthodes :
-	- Cross-document messaging
-	- Channel messaging
+  - Cross-document messaging
+  - Channel messaging
 
 Notes :
 
@@ -100,11 +100,11 @@ Notes :
 ## Cross document messaging
 
 - Principe :
-	- Permettre aux documents de contextes différents de communiquer quelque soit leurs origines
-	- Exemple : communication entre une iframe et sa page parente
+  - Permettre aux documents de contextes différents de communiquer quelque soit leurs origines
+  - Exemple : communication entre une iframe et sa page parente
 
 - Origine : domaine + protocole + port
-	- https://www.site.com, http://www.site.com, http://site.com, http://www.site.com:81, ont tous une origine différente
+  - https://www.site.com, http://www.site.com, http://site.com, http://www.site.com:81, ont tous une origine différente
 
 Notes :
 
@@ -113,12 +113,12 @@ Notes :
 ## Cross-document messaging
 
 - Envoi de message à window avec postMessage
-	- Les messages peuvent être des objets ou tableaux de strings, entiers, Date, File, Blob, Filelist (File API), …
-	- Les objets listé dans transfer sont transférés (sans copie)
-	- TargetOrigin : « origin » qui reçoit le message
-		- ''*'' pour des origines différentes, ''\'' pour restreindre à la même origine que window, ou une url (même origine)
+  - Les messages peuvent être des objets ou tableaux de strings, entiers, Date, File, Blob, Filelist (File API), …
+  - Les objets listé dans transfer sont transférés (sans copie)
+  - TargetOrigin : « origin » qui reçoit le message
+    - ''*'' pour des origines différentes, ''\'' pour restreindre à la même origine que window, ou une url (même origine)
 - Réception de messages
-	- Ou écouter l'événement ''message'' avec addEventListener
+  - Ou écouter l'événement ''message'' avec addEventListener
 
 ```
 otherWindow.postMessage(message, targetOrigin [, transfer ]) ;
@@ -172,10 +172,10 @@ Notes :
 Support
 
 - Navigateurs :
-	- Chrome 4.0+
-	- Firefox 3.0+
-	- Safari 4.0+
-	- Opera 9.5+
+  - Chrome 4.0+
+  - Firefox 3.0+
+  - Safari 4.0+
+  - Opera 9.5+
 
 - Tester l'implémentation
 
@@ -196,18 +196,18 @@ Notes :
 Sécurité
 
 - Toujours vérifier l'origine du message
-	- Ne pas accepter des messages d'origines inconnues
+  - Ne pas accepter des messages d'origines inconnues
 
 - Vérifier le contenu et format des données transmises
-	- Ne pas utiliser le message directement (dans un formulaire par exemple).
+  - Ne pas utiliser le message directement (dans un formulaire par exemple).
 
 - Attention au ''*''
-	- La destination du message n'est pas assurée
-	- Ne pas transmettre de données confidentielles
+  - La destination du message n'est pas assurée
+  - Ne pas transmettre de données confidentielles
 
 - Possibilités d'attaques de type DoS
-	- Limiter le taux de réception de messages
-	- Attention au volume des messages reçus
+  - Limiter le taux de réception de messages
+  - Attention au volume des messages reçus
 
 ![](ressources/images/04_webmessaging-1000020100000080000000802E71420D.png)
 
@@ -218,15 +218,15 @@ Notes :
 ## Channel messaging
 
 - Communication bi-directionnelle, asynchrone, entre documents de contextes de navigation différents
-	- Ouvre un canal de communication
-	- Messages envoyés d'un port à l'autre sous forme d'événements (MessageEvent)
+  - Ouvre un canal de communication
+  - Messages envoyés d'un port à l'autre sous forme d'événements (MessageEvent)
 
 - Intérêt par rapport à cross-document messaging
-	- Communication inter-origines précise
-	- Contrôle qui envoi et reçoit les messages
+  - Communication inter-origines précise
+  - Contrôle qui envoi et reçoit les messages
 
 - Cas d'utilisation
-	- Sites sociaux, applications « mashup »
+  - Sites sociaux, applications « mashup »
 
 Notes :
 
@@ -266,8 +266,8 @@ Notes :
 API
 
 - Deux interfaces :
-	- MessageChannel
-	- MessagePort
+  - MessageChannel
+  - MessagePort
 
 ```
 interface MessageChannel {
@@ -295,11 +295,11 @@ Notes :
 ## Channel messaging
 
 - Lorsqu'on crée le « MessageChannel », il en résulte deux ports non reliés.
-	- Un reste local, l'autre est envoyé au contexte destinataire
-	- On appel `start()` pour ouvrir le port et activer la réception de messages
-	- La méthode `close()` ferme le port et coupe le canal de communication
-	- Les deux ports communiquent avec postMessage
-	- On utilise la méthode onMessage() pour écouter
+  - Un reste local, l'autre est envoyé au contexte destinataire
+  - On appel `start()` pour ouvrir le port et activer la réception de messages
+  - La méthode `close()` ferme le port et coupe le canal de communication
+  - Les deux ports communiquent avec postMessage
+  - On utilise la méthode onMessage() pour écouter
 
 ```javascript
 channel.port1.postMessage('msg from port1');
@@ -322,11 +322,11 @@ Support et état de spécification
 
 - Spécification en cours de rédaction
 - Non présente sur caniuse et html5 test
-	- Seul Chrome semble la supporter correctement, Opera et Safari ont un support partiel.
+  - Seul Chrome semble la supporter correctement, Opera et Safari ont un support partiel.
 
 - Tester le support :
-	- Définition de `window.MessageChannel`
-	- L’existence des ports suite à la création du channel ; l'envoi d'un des ports et sa bonne réception
+  - Définition de `window.MessageChannel`
+  - L’existence des ports suite à la création du channel ; l'envoi d'un des ports et sa bonne réception
 
 ```javascript
 if (window.MessageChannel === undefined){

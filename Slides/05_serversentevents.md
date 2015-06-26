@@ -25,17 +25,17 @@ Notes :
 ## Server Sent Events
 
 - Spécification connue aussi sous le nom de EventSource
-	- http://www.w3.org/TR/eventsource/
+  - http://www.w3.org/TR/eventsource/
 
 - Principe :
-	- L'application reçoit automatiquement des messages envoyés par le serveur sous forme d'événement DOM
-	- Communication dans un seul sens en HTTP
+  - L'application reçoit automatiquement des messages envoyés par le serveur sous forme d'événement DOM
+  - Communication dans un seul sens en HTTP
 
 - Exemples de cas d'utilisation :
-	- Notifications temps réel, actualités
-	- Réseaux sociaux : fil twitter/facebook temps réel
-	- Cours des actions en temps réel
-	- Monitoring de serveur
+  - Notifications temps réel, actualités
+  - Réseaux sociaux : fil twitter/facebook temps réel
+  - Cours des actions en temps réel
+  - Monitoring de serveur
 
 Notes :
 
@@ -132,14 +132,14 @@ Notes :
 Coté serveur
 
 - Format des données envoyées
-	- Type MIME : text/event-stream
-	- Encodage : UTF-8
-	- Une ligne entre chaque message à envoyer
+  - Type MIME : text/event-stream
+  - Encodage : UTF-8
+  - Une ligne entre chaque message à envoyer
 
 - En-tête HTTP
 
 - Il existe 4 champs interprétés pour un event stream :
-	- data, event, id, retry
+  - data, event, id, retry
 
 ```
 data: message 1
@@ -162,8 +162,8 @@ Notes :
 Event stream
 
 - Définir le nom du message à envoyer avec event
-	- Permet de spécifier des types de messages
-		- Par défaut « message » : géré par onmessage()
+  - Permet de spécifier des types de messages
+    - Par défaut « message » : géré par onmessage()
 
 ```
 event: time
@@ -192,10 +192,10 @@ Notes :
 Event stream
 
 - Utiliser les id
-	- On peut associer un identifiant à un message
-	- L'attribut lastEventId du MessageEvent contient le dernier id de la source
-	- En cas de déconnexion, une requête avec le header last-event-id est envoyée
-	- Le navigateur pourra ainsi déterminer le dernier message envoyé
+  - On peut associer un identifiant à un message
+  - L'attribut lastEventId du MessageEvent contient le dernier id de la source
+  - En cas de déconnexion, une requête avec le header last-event-id est envoyée
+  - Le navigateur pourra ainsi déterminer le dernier message envoyé
 
 ```
 id: 13
@@ -216,7 +216,7 @@ Event stream
 
 - Le champ retry sert à contrôler le timeout de reconnexion (par défaut ~3s)
 - Envoyer des données json
-	- Le client peut ensuite parser les données reçues
+  - Le client peut ensuite parser les données reçues
 
 ```
 retry: 10000
@@ -314,10 +314,10 @@ Notes :
 ## Support coté client
 
 - Navigateurs :
-	- Chrome 6.0+
-	- Firefox 6.0+
-	- Safari 5.0+
-	- Opera 11.0+
+  - Chrome 6.0+
+  - Firefox 6.0+
+  - Safari 5.0+
+  - Opera 11.0+
 
 - Tester l'implémentation
 

@@ -118,7 +118,7 @@ Notes :
   - TargetOrigin : « origin » qui reçoit le message
     - ''*'' pour des origines différentes, ''\'' pour restreindre à la même origine que window, ou une url (même origine)
 - Réception de messages
-  - Ou écouter l'événement ''message'' avec addEventListener
+  - Ou écouter l'événement `message` avec `addEventListener`
 
 ```
 otherWindow.postMessage(message, targetOrigin [, transfer ]) ;
@@ -138,7 +138,7 @@ Notes :
 
 ## Cross-document messaging
 
-- Exemple : envoi de message entre une page et une iframe
+- Exemple : envoi de message entre une page et une `iframe`
 
 ```html
     //document A at http://domainA.com
@@ -219,7 +219,7 @@ Notes :
 
 - Communication bi-directionnelle, asynchrone, entre documents de contextes de navigation différents
   - Ouvre un canal de communication
-  - Messages envoyés d'un port à l'autre sous forme d'événements (MessageEvent)
+  - Messages envoyés d'un port à l'autre sous forme d'événements (`MessageEvent`)
 
 - Intérêt par rapport à cross-document messaging
   - Communication inter-origines précise
@@ -266,8 +266,8 @@ Notes :
 API
 
 - Deux interfaces :
-  - MessageChannel
-  - MessagePort
+  - `MessageChannel`
+  - `MessagePort`
 
 ```
 interface MessageChannel {
@@ -299,7 +299,7 @@ Notes :
   - On appel `start()` pour ouvrir le port et activer la réception de messages
   - La méthode `close()` ferme le port et coupe le canal de communication
   - Les deux ports communiquent avec postMessage
-  - On utilise la méthode onMessage() pour écouter
+  - On utilise la méthode `onMessage()` pour écouter
 
 ```javascript
 channel.port1.postMessage('msg from port1');

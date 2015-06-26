@@ -128,7 +128,7 @@ Notes :
 - Cette API n'est pas déconnectée d'internet ou de toute forme de serveurs
 - Internet va servir pour porter le SignalChannel et l'établissement de la communication entre les 2 peers
 - La connexion en local sur un réseau LAN est également possible
-- La notion de SignalChannel est beaucoup utilisée dans la documentation mais ne fait pas partie de l'API. C'est à chaque application de mettre en place ce système pour établir la connexion entre 2 peers souhaitant communiquer
+- La notion de `SignalChannel` est beaucoup utilisée dans la documentation mais ne fait pas partie de l'API. C'est à chaque application de mettre en place ce système pour établir la connexion entre 2 peers souhaitant communiquer
 
 Notes :
 
@@ -174,19 +174,19 @@ Notes :
 
 - Obtenir les objets de l'API nécessite d'utiliser les préfixes
 
-```
+```javascript
 var RTCPeerConnection = window.mozRTCPeerConnection ||
-window.webkitRTCPeerConnection;
+  window.webkitRTCPeerConnection;
 
 var RTCIceCandidate = window.mozRTCIceCandidate ||
-window.RTCIceCandidate;
+  window.RTCIceCandidate;
 
 var RTCSessionDescription = window.mozRTCSessionDescription ||
-window.RTCSessionDescription;
+  window.RTCSessionDescription;
 
 var getUserMedia = navigator.getUserMedia ||
-navigator.mozGetUserMedia ||
-navigator.webkitGetUserMedia;
+  navigator.mozGetUserMedia ||
+  navigator.webkitGetUserMedia;
 ```
 
 Notes :
@@ -195,24 +195,25 @@ Notes :
 
 ## L'API : Créer une connexion
 
-- DtlsSrtpKeyAgreement : interopérabilité Chrome / Firefox
-- RtpDataChannels : Datachannel pour Firefox
+- `DtlsSrtpKeyAgreement` : interopérabilité Chrome / Firefox
+- `RtpDataChannels` : Datachannel pour Firefox
 
-```
+```javascript
 var pc = new RTCPeerConnection(servers, options);
 
 var servers = {
-iceServers: [
-{url: "stun:stun.l.google.com:19302"},
-{url: "turn:numb.viagenie.ca", credential: "html5rtc",
-username: "user@html5.fr"}
-]};
+  iceServers: [
+    {url: "stun:stun.l.google.com:19302"},
+    {url: "turn:numb.viagenie.ca", credential: "html5rtc", username: "user@html5.fr"}
+  ]
+};
 
 var options = {
-optional: [
-{DtlsSrtpKeyAgreement: true},
-{RtpDataChannels: true}
-]};
+  optional: [
+    {DtlsSrtpKeyAgreement: true},
+    {RtpDataChannels: true}
+  ]
+};
 ```
 
 Notes :
@@ -226,23 +227,23 @@ Notes :
 ```
 RTCPeerConnection {
 
-iceConnectionState: String
-iceGatheringState: String
-localDescription: RTCSessionDescription
-remoteDescription: RTCSessionDescription
+  iceConnectionState: String
+  iceGatheringState: String
+  localDescription: RTCSessionDescription
+  remoteDescription: RTCSessionDescription
 
-onaddstream: EventHandler
-ondatachannel: EventHandler
-onicecandidate: EventHandler
+  onaddstream: EventHandler
+  ondatachannel: EventHandler
+  onicecandidate: EventHandler
 
-addIceCandidate: Function
-addStream: Function
-close: Function
-createAnswer : Function
-createDataChannel: Function
-createOffer: Function
-setLocalDescription: Function
-setRemoteDescription: Function
+  addIceCandidate: Function
+  addStream: Function
+  close: Function
+  createAnswer : Function
+  createDataChannel: Function
+  createOffer: Function
+  setLocalDescription: Function
+  setRemoteDescription: Function
 }```
 
 Notes :
@@ -261,22 +262,23 @@ Notes :
 
 - Pour se connecter à un peer, il faut créer une Offer et la lui transmettre. Il faut également la définir comme LocalDescription de notre connexion :
 
-```
+```javascript
 pc.createOffer(function (offer) {
-pc.setLocalDescription(offer);
+  pc.setLocalDescription(offer);
 
-send("offer", JSON.stringify(offer)); // pseudo-code
+  send("offer", JSON.stringify(offer)); // pseudo-code
 }, errorHandler, constraints);
 
 var errorHandler = function (err) {
-console.error(err);
+  console.error(err);
 };
 
 var constraints = {
-mandatory: {
-OfferToReceiveAudio: true, // demande l'audio
-OfferToReceiveVideo: true // demande la video
-}};
+  mandatory: {
+    OfferToReceiveAudio: true, // demande l'audio
+    OfferToReceiveVideo: true // demande la video
+  }
+};
 ```
 
 Notes :
@@ -285,20 +287,20 @@ Notes :
 
 ## L'API : Création d'une Answer
 
-- Lorsque le destinataire reçoit l'offer, il doit la définir comme RemoteDescription puis renvoyer une Answer pour compléter la mise en relation, en se l'assignant comme LocalDescription :
+- Lorsque le destinataire reçoit l'`offer`, il doit la définir comme `RemoteDescription` puis renvoyer une `Answer` pour compléter la mise en relation, en se l'assignant comme `LocalDescription` :
 
-```
+```javascript
 var pc2 = new RTCPeerConnection(servers, options); // peer 2
 
 recv("offer", function (offer) { // pseudo-code
 
-var desc = new SessionDescription(JSON.parse(offer))
-pc2.setRemoteDescription(desc);
+  var desc = new SessionDescription(JSON.parse(offer))
+  pc2.setRemoteDescription(desc);
 
-pc2.createAnswer(function (answer) {
-pc2.setLocalDescription(answer);
+  pc2.createAnswer(function (answer) {
+  pc2.setLocalDescription(answer);
 
-send("answer", JSON.stringify(answer)); // pseudo-code
+  send("answer", JSON.stringify(answer)); // pseudo-code
 }, errorHandler, constraints);
 
 });
@@ -314,11 +316,11 @@ Notes :
 - Tant que la description n'a pas été assignée, on ne peut pas ajouter d'ice candidate. (sinon une erreur est levée)
 - Une fois la connexion ouverte, les Peers pourront récupérer les flux audio et vidéo, et s'échanger des données via les DataChannels
 
-```
+```javascript
 recv("answer", function (answer) { // pseudo-code
 
-var desc = new SessionDescription(JSON.parse(answer))
-pc.setRemoteDescription(desc);
+  var desc = new SessionDescription(JSON.parse(answer))
+  pc.setRemoteDescription(desc);
 
 });
 ```
@@ -345,11 +347,11 @@ Notes :
 - Lorsqu’un candidat ICE est trouvé (combinaison d'informations de connexion), un évènement icecandidate est lancé par le navigateur. Il faut alors le transmettre au pair avec lequel on souhaite communiquer :
 - Le pseudo-code correspond à la notion de SignalChannel et peut être effectué par xhr ou avec socket-io par exemple
 
-```
+```javascript
 pc.onicecandidate = function (e) {
 if (e.candidate == null) { return }
-send("candidate", JSON.stringify(e.candidate)); // pseudo-code
-pc.addIceCandidate(new RTCIceCandidate(e.candidate));
+  send("candidate", JSON.stringify(e.candidate)); // pseudo-code
+  pc.addIceCandidate(new RTCIceCandidate(e.candidate));
 };
 ```
 
@@ -361,7 +363,7 @@ Notes :
 
 - Pour échanger des données via WebRTC, il faut utiliser les DataChannel :
 
-```
+```javascript
 // Peer 1
 var channel = pc.createDataChannel(channelName, channelOptions);
 var channelOptions = {}; // vide pour l'instant car mal supporté
@@ -370,9 +372,9 @@ channel.onmessage = function(evt){ console.log('message'); };
 
 // Peer 2
 pc.ondatachannel = function(evt){
-var channel = evt.channel;
+  var channel = evt.channel;
 
-channel.onmessage = function(evt){ console.log('message'); };
+  channel.onmessage = function(evt){ console.log('message'); };
 };
 ```
 
@@ -385,7 +387,7 @@ Notes :
 - Pour envoyer les données, on utiliser la méthode send, comme pour l'API WebSockets
 - Il est également possible de suivre l'état du channel via différents évènements :
 
-```
+```javascript
 // Envoi de données
 channel.send("Hello you !");
 
@@ -401,8 +403,8 @@ Notes :
 
 ## L'API : échanger des données
 
-- channelName est une string identifiant le datachannel et ne doit pas contenir d’espace, sinon chrome échouera
-- send n’accepte que les types suivants : String, Blob, ArrayBuffer, ArrayBufferView
+- `channelName` est une string identifiant le `datachannel` et ne doit pas contenir d’espace, sinon Chrome échouera
+- `send` n’accepte que les types suivants : `String`, `Blob`, `ArrayBuffer`, `ArrayBufferView`
 - Syntaxe proche de celle des WebSockets
 - RTCDataChannel peut être plus puissant que les WS pour échanger de la donnée car il n'y a aucun intermédiaire.
 
@@ -412,17 +414,17 @@ Notes :
 
 ## L'API : échanger des données
 
-||WebSocket|DataChannel|
-|---|---|---|
-|Encryption|configurable|toujours|
-|Fiabilité|fiable|configurable|
-|Livraison|ordonné|configurable|
-|Multiplexé|non|oui|
-|Transmission|message|message|
-|Transferts binaires|oui|oui|
-|Transferts UTF-8|oui|oui|
-|Compression|non|non|
-|Relais|serveur|P2P|
+|                     | WebSocket    | DataChannel  |
+|---------------------|--------------|--------------|
+| Encryption          | configurable | toujours     |
+| Fiabilité           | fiable       | configurable |
+| Livraison           | ordonné      | configurable |
+| Multiplexé          | non          | oui          |
+| Transmission        | message      | message      |
+| Transferts binaires | oui          | oui          |
+| Transferts UTF-8    | oui          | oui          |
+| Compression         | non          | non          |
+| Relais              | serveur      | P2P          |
 
 ![](ressources/images/07_web_rtc-TablePreview1.svm)
 
@@ -439,21 +441,21 @@ Notes :
 ```
 RTCDataChannel {
 
-id: Number
-binaryType: String
-bufferedAmount: Number
-label: String
-readyState: String
-reliable: Boolean
-ordered: Boolean
+  id: Number
+  binaryType: String
+  bufferedAmount: Number
+  label: String
+  readyState: String
+  reliable: Boolean
+  ordered: Boolean
 
-onclose: EventHandler
-onerror: EventHandler
-onmessage: EventHandler
-onopen: EventHandler
+  onclose: EventHandler
+  onerror: EventHandler
+  onmessage: EventHandler
+  onopen: EventHandler
 
-send : Function
-close: Function
+  send : Function
+  close: Function
 }
 ```
 
@@ -474,13 +476,13 @@ Notes :
 var video = document.getElementById("mediaViewer");
 
 var constraints = {
-video: true,
-audio: true
+  video: true,
+  audio: true
 };
 
 navigator.getUserMedia(constraints, function (stream) {
-pc.addStream(stream);
-video.src = URL.createObjectURL(stream); // Blob URL
+  pc.addStream(stream);
+  video.src = URL.createObjectURL(stream); // Blob URL
 }, errorHandler);
 ```
 
@@ -490,7 +492,7 @@ Notes :
 
 ## L'API : Audio et Vidéo
 
-- getUserMedia récupère le flux audio/vidéo. Il prend en paramètres des contraintes et 2 callbacks : succès et erreur
+- `getUserMedia` récupère le flux audio/vidéo. Il prend en paramètres des contraintes et 2 callbacks : succès et erreur
 - La communication étant déjà établie via notre peerConnection, Peer 2 doit seulement réagir à l'évènement d'ajout de stream pour le récupérer
 
 // Peer 2
@@ -500,7 +502,7 @@ Notes :
 ```javascript
 var video = document.getElementById("mediaViewer2");
 pc2.onaddstream = function (evt) {
-video.src = URL.createObjectURL(evt.stream);
+  video.src = URL.createObjectURL(evt.stream);
 };
 ```
 
@@ -540,18 +542,18 @@ Notes :
 
 ```
 MediaStream {
-id : String
-label : String
+  id : String
+  label : String
 
-readyState : short
+  readyState : short
 
-onaddtrack : EventHandler
-onended : EventHandler
-onremovetrack : EventHandler
+  onaddtrack : EventHandler
+  onended : EventHandler
+  onremovetrack : EventHandler
 
-getAudioTracks: Function
-getVideoTracks: Function
-stop : Function
+  getAudioTracks: Function
+  getVideoTracks: Function
+  stop : Function
 }
 ```
 

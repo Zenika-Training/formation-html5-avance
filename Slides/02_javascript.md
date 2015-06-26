@@ -31,7 +31,7 @@ Notes :
 
 ```javascript
 function myFunc() {
-    var x = 0;
+  var x = 0;
 }
 console.log(x); //undefined
 ```
@@ -42,23 +42,24 @@ Notes :
 
 ## Closure (Exemple)
 
+- Les closures permettent l'encapsulation.
+
 ```javascript
 function monObjet(value) {
-    var x = value;
-    return {
-        getX : function() {
-            return x;
-        }
-    };
+  var x = value;
+  return {
+    getX : function() {
+      return x;
+    }
+  };
 }
 var obj = monObjet(3);
 console.log(obj.x); // undefined
 console.log(obj.getX()); // 3
 ```
 
-Visibilité limitée à la fonction monObjet. La closure permet d'y accéder
-
-- Les closures permettent l'encapsulation
+- Visibilité limitée à la fonction `monObjet`.
+- La closure permet d'y accéder.
 
 Notes :
 
@@ -66,17 +67,17 @@ Notes :
 
 ## Héritage / Prototype
 
-- Javascript est un langage par prototype, permettant une approche orientée objet
-- Les prototypes sont en quelque sorte les cartes d'identités des objets
-- Il n'existe pas de 'classes' mais les objets héritent du Prototype de l'objet étendu
-- Ce prototype est partagé
+- Javascript est un langage par prototype, permettant une approche orientée objet.
+- Les prototypes sont en quelque sorte les cartes d'identités des objets.
+- Il n'existe pas de 'classes' mais les objets héritent du prototype de l'objet étendu.
+- Ce prototype est partagé.
 
 ```javascript
 function Personne() {};
 var olivier = new Personne();
 olivier.sayHey(); // error
 Personne.prototype.sayHey = function() {
-    console.log('hey !') ;
+  console.log('hey !') ;
 }
 olivier.sayHey() ; // hey !
 ```
@@ -87,14 +88,14 @@ Notes :
 
 ## Héritage / Prototype
 
-- Redéfinir une fonction du même nom permet de surcharger celle du parent
-- Mais il reste possible de faire appel à la fonction héritée
+- Redéfinir une fonction du même nom permet de surcharger celle du parent.
+- Mais il reste possible de faire appel à la fonction héritée.
 
 ```javascript
 var Benoit = new Personne();
 Benoit.sayHey(); // hey !
 Benoit.sayHey = function(){
-    console.log('olá !') ;
+  console.log('olá !') ;
 }
 Benoit.sayHey(); // olá
 Olivier.sayHey(); // hey !
@@ -110,12 +111,12 @@ Notes :
 
 ## Héritage / Prototype
 
-- En revanche, il est possible d'effectuer des modifications globales
-- L'héritage de prototype permet donc d'enrichir des types
+- En revanche, il est possible d'effectuer des modifications globales.
+- L'héritage de prototype permet donc d'enrichir des types.
 
 ```javascript
 Benoit.constructor.prototype.sayHey = function(){
-    console.log('Pourquoi ?') ;
+  console.log('Pourquoi ?') ;
 }
 Olivier.sayHey(); // => Pourquoi ?
 ```
@@ -137,8 +138,8 @@ Notes :
 
 ```javascript
 var voiture = {
-    marque : 'mercedes',
-    annee : 1989
+  marque : 'mercedes',
+  annee : 1989
 }
 voiture.marque; //mercedes
 voiture.annee; //1989

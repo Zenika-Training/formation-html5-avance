@@ -43,7 +43,7 @@ Notes :
   - On ne peut pas lancer plusieurs script en même temps
 
 - On peut faire de l'asynchronisme
-- setTimeout(), setInterval(), XMLHttpRequest, event handler
+- `setTimeout()`, `setInterval()`, `XMLHttpRequest`, event handler
   - Mais ne se lance pas en même temps
 
 - web workers apporte enfin le multi-threading
@@ -128,15 +128,15 @@ Notes :
 - Les workers, à cause de leur comportement multi-thread, ont un accès limité aux fonctionnalités javascript
 - Ils n'ont pas accès:
   - Au DOM (qui n'est pas thread safe)
-  - À l'objet window
-  - À l'objet document
-  - A l'objet parent
+  - À l'objet `window`
+  - À l'objet `document`
+  - A l'objet `parent`
 
 - Il ont accès
   - À l'objet navigator
   - À l'objet location (en lecture seule)
-  - XMLHttpRequest
-  - setTimeout()/clearTimeout() et setInterval()/clearInterval()
+  - `XMLHttpRequest`
+  - `setTimeout()`/`clearTimeout()` et `setInterval()`/`clearInterval()`
   - Au cache de l'application
 
 Notes :
@@ -147,7 +147,7 @@ Notes :
 
 - La communication entre le worker et la page parente se fait uniquement par message
 
-- L'événement sera appelé quand le worker appellera son propre postMessage()
+- L'événement sera appelé quand le worker appellera son propre `postMessage()`
 
 ```
 //dans la page html
@@ -207,7 +207,7 @@ Notes :
 <s cript>
 var worker = new Worker('worker.js');
 worker.onmessage = function (event) {
-document.getElementById('result').textContent =  event.data;
+  document.getElementById('result').textContent =  event.data;
 };
 </s cript>
 </body>
@@ -223,15 +223,15 @@ Notes :
 - `worker.js`
 - On calcule et affiche des nombres premiers sans bloquer l'IHM
 
-```
+```javascript
 var n = 1;
 search: while (true) {
-n += 1;
-for (var i = 2; i <= Math.sqrt(n); i += 1)
-if (n % i == 0)
-continue search;
-// found a prime!
-postMessage(n);
+  n += 1;
+  for (var i = 2; i <= Math.sqrt(n); i += 1)
+  if (n % i == 0)
+  continue search;
+  // found a prime!
+  postMessage(n);
 }```
 
 Notes :
@@ -246,13 +246,16 @@ Notes :
   - Lineno: le numéro de ligne de l'erreur
   - Message: la description de l'erreur
 
-```
+```javascript
 function onError(e) {
-document.getElementById('error').textContent = [
-'ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message].join('');
-}function onMsg(e) {
-document.getElementById('result').textContent = e.data;
-}var worker = new Worker('workerWithError.js');
+  document.getElementById('error').textContent = 
+    ['ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message]
+    .join('');
+}
+function onMsg(e) {
+  document.getElementById('result').textContent = e.data;
+}
+var worker = new Worker('workerWithError.js');
 worker.addEventListener('message', onMsg, false);
 worker.addEventListener('error', onError, false);
 worker.postMessage();
@@ -280,14 +283,14 @@ Notes :
 - Shared web workers autorisent plusieurs scripts à communiquer avec un seul Worker
 - La communication se fait par un port
 
-```
+```javascript
 var worker = new SharedWorker("jsworker.js");
 ```
 
-```
+```javascript
 var worker = new SharedWorker("jsworker.js");
 worker.port.addEventListener("message", function(e) {
-alert(e.data);
+  alert(e.data);
 }, false);
 worker.port.start();
 // post a message to the shared web worker
@@ -307,14 +310,15 @@ Notes :
 - Les shared Web Worker ne sont pas encore très courants
   - Support navigateurs : Chrome 4.0+, Safari 5.0+, Opera 10.6+
 
-```
+```javascript
 onconnect = function(e) {
-var port = e.ports[0];
-port.postMessage('Hello World!');
-port.onmessage = function(e) {
-port.postMessage('pong'); //non pas e.ports[0].postMessage
-//ou : e.target.postMessage('pong');
-}}
+  var port = e.ports[0];
+  port.postMessage('Hello World!');
+  port.onmessage = function(e) {
+    port.postMessage('pong'); //non pas e.ports[0].postMessage
+    //ou : e.target.postMessage('pong');
+  }
+}
 ```
 
 Notes :
@@ -347,11 +351,12 @@ Notes :
 
 - Tester le support
 
-```
+```javascript
 if (!Worker) {
-console.log("Votre navigateur ne supporte pas les web workers");
-}if (!SharedWorker){
-console.log("Votre navigateur ne supporte pas les shared workers");
+  console.log("Votre navigateur ne supporte pas les web workers");
+}
+if (!SharedWorker){
+  console.log("Votre navigateur ne supporte pas les shared workers");
 }
 ```
 

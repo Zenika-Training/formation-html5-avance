@@ -53,11 +53,9 @@ Notes :
 
 
 
-## L'API XMLHttpRequest
+## L'API XMLHttpRequest (Rappels)
 
-Rappels
-
-- Objet window.XMLHttpRequest
+- Objet `window.XMLHttpRequest`
   - Envoi d'une requête GET
   - Envoi d'une requête POST
   - État de la requête et réponse
@@ -86,16 +84,14 @@ Notes :
 
 
 
-## L'API XMLHttpRequest
-
-Limitations
+## L'API XMLHttpRequest (Limitations)
 
 - Envoi de données uniquement en format texte, html, xml
   - Pas de possibilités d'envoi de fichier
 
 - Restriction cross-domain : same origin policy
   - Pas de requêtes cross-origin
-  - On avait recours à des solutions de contournement comme passer par un serveur proxy, modifier document.domain …
+  - On avait recours à des solutions de contournement comme passer par un serveur proxy, modifier `document.domain` …
 
 - Progression de requête
   - `OnReadyStateChange` ne permet pas de connaître la progression de la requête
@@ -137,14 +133,14 @@ Notes :
 
 ## Meilleure gestion des données
 
-ResponseType
+`ResponseType`
 
 - On peut spécifier le format de réponse
-  - xhr.responseType
-  - "text", "arraybuffer", "blob", ou "document"
-  - Par défaut "text"
+  - `xhr.responseType`
+  - `text`, `arraybuffer`, `blob`, ou `document`
+  - Par défaut `text`
 
-- xhr.response devient DOMString, ArrayBuffer, Blob, ou Document
+- `xhr.response` devient `DOMString`, `ArrayBuffer`, `Blob`, ou `Document`
 
 ```javascript
 var txt = 'data';
@@ -165,11 +161,11 @@ Notes :
 
 ## Meilleure gestion des données
 
-FormData
+`FormData`
 
 - Envoyer des données clé / valeur avec l'objet FormData
 - Donnée envoyée comme dans un formulaire HTML normal
-- FormData utilise le type multipart/form-data
+- FormData utilise le type `multipart/form-data`
   - L'envoi de fichier est possible
 
 ```javascript
@@ -191,7 +187,7 @@ Notes :
 
 ## Meilleure gestion des données
 
-FormData
+`FormData`
 
 - L'entête content-type est ajouté par le navigateur
   - Plus besoin de la spécifier
@@ -217,7 +213,7 @@ Notes :
 
 ## Meilleure gestion des données
 
-FormData
+`FormData`
 
 - Si vous avez un formulaire déjà existant dans votre document
 
@@ -257,18 +253,18 @@ Download
   - Blob responses
   - `xhr.responseType = 'blob'`;
 
-- var blobURL = window.URL.createObjectURL(blob);
-  - Créé une String URL qui référence l'objet blob dans le DOM
-
-- Les BlobURL sont uniques mais c'est toujours une bonne pratique de les déréférencer.
-
 ```
 blob:http://localhost/c745ef73-ece9-46da-8f66-ebes574789b1
 ```
 
+- `var blobURL = window.URL.createObjectURL(blob);`
+  - Créé une String URL qui référence l'objet blob dans le DOM
+
 ```
 window.URL.revokeObjectURL(blobURL);
 ```
+
+- Les BlobURL sont uniques mais c'est toujours une bonne pratique de les déréférencer.
 
 ```
 blob:http://localhost/c745ef73-ece9-46da-8f66-ebes574789b1
@@ -349,9 +345,9 @@ Notes :
 Upload
 
 - Upload de fichier
-  - Devient facile avec FormData
+  - Devient facile avec `FormData`
 
-- Envoyer un blob ou un file
+- Envoyer un `blob` ou une `file`
 
 ```javascript
 function uploadFiles(url, files) {
@@ -399,15 +395,15 @@ Notes :
 
 ## ProgressEvent Interface
 
-|attribute|type|Explanation|
-|---|---|---|
-|onloadstart|loadstart|When the request starts.|
-|onprogress|progress|While loading and sending data.|
-|onabort|abort|When the request has been aborted.|
-|onerror|error|When the request has failed.|
-|onload|load|When the request has successfully completed.|
-|ontimeout|timeout|When the author specified timeout has passed before the request could complete.|
-|onloadend|loadend|When the request has completed, regardless of whether or not it was successful.|
+| attribute     | type        | Explanation                                                                     |
+|---------------|-------------|---------------------------------------------------------------------------------|
+| `onloadstart` | `loadstart` | When the request starts.                                                        |
+| `onprogress`  | `progress`  | While loading and sending data.                                                 |
+| `onabort`     | `abort`     | When the request has been aborted.                                              |
+| `onerror`     | `error`     | When the request has failed.                                                    |
+| `onload`      | `load`      | When the request has successfully completed.                                    |
+| `ontimeout`   | `timeout`   | When the author specified timeout has passed before the request could complete. |
+| `onloadend`   | `loadend`   | When the request has completed, regardless of whether or not it was successful. |
 
 ![](ressources/images/03_xmlhttprequest-TablePreview1.svm)
 
@@ -429,10 +425,11 @@ Notes :
 // Listen to the upload progress.
 var progressBar = document.querySelector('progress');
 xhr.upload.onprogress = function(e) {
-if (e.lengthComputable) {
-progressBar.value = (e.loaded / e.total) * 100;
-progressBar.textContent = progressBar.value;
-}};
+  if (e.lengthComputable) {
+    progressBar.value = (e.loaded / e.total) * 100;
+    progressBar.textContent = progressBar.value;
+  }
+};
 ```
 
 Notes :
@@ -519,7 +516,7 @@ Notes :
   - client-side SSL certificates
 
 - Si on veut les envoyer au serveur
-  - xhr.withCredentials = true;
+  - `xhr.withCredentials = true;`
 
 - Nécessaire seulement pour CORS
 - Access-Control-Allow-Origin header ne contient pas de *

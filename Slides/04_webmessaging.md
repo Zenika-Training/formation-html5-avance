@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Nouvelles méthodes de communication
 
 - Possibilités de partager des données entre documents web de différents contextes de navigation
@@ -42,7 +41,6 @@ Notes :
 
 
 
-
 ## Nouvelles méthodes de communication → Pourquoi ?
 
 - HTTP : protocole déconnecté
@@ -55,7 +53,6 @@ Notes :
 		- HTML5 : Web messaging
 
 Notes :
-
 
 
 
@@ -86,7 +83,6 @@ Notes :
 
 
 
-
 ## Web messaging
 
 - Anciennement PostMessage API http://dev.w3.org/html5/postmsg/
@@ -101,7 +97,6 @@ Notes :
 
 
 
-
 ## Cross document messaging
 
 - Principe :
@@ -112,7 +107,6 @@ Notes :
 	- https://www.site.com, http://www.site.com, http://site.com, http://www.site.com:81, ont tous une origine différente
 
 Notes :
-
 
 
 
@@ -139,7 +133,6 @@ window.onmessage = function(event) {
 ```
 
 Notes :
-
 
 
 
@@ -174,7 +167,6 @@ Notes :
 
 
 
-
 ## Cross-document messaging
 
 Support
@@ -196,7 +188,6 @@ if (!!window.postMessage) {
 ```
 
 Notes :
-
 
 
 
@@ -224,7 +215,6 @@ Notes :
 
 
 
-
 ## Channel messaging
 
 - Communication bi-directionnelle, asynchrone, entre documents de contextes de navigation différents
@@ -239,7 +229,6 @@ Notes :
 	- Sites sociaux, applications « mashup »
 
 Notes :
-
 
 
 
@@ -269,7 +258,6 @@ window.onmessage = function(event) {
 ```
 
 Notes :
-
 
 
 
@@ -304,7 +292,6 @@ Notes :
 
 
 
-
 ## Channel messaging
 
 - Lorsqu'on crée le « MessageChannel », il en résulte deux ports non reliés.
@@ -326,7 +313,6 @@ channel.port1.onmessage = function(event) {
 ```
 
 Notes :
-
 
 
 
@@ -358,7 +344,6 @@ window.onmessage = function(event) {
 ```
 
 Notes :
-
 
 
 

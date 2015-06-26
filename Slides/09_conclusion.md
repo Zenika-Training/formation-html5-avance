@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Résumé
 
 - Communication Client > Serveur
@@ -44,7 +43,6 @@ Notes :
 
 
 
-
 ## Sécurité - rappels
 
 - Toujours vérifier l'origine de la communication
@@ -55,7 +53,6 @@ Notes :
 	- Penser à vérifier l'évolution des spécifications et des implémentations
 
 Notes :
-
 
 
 
@@ -75,7 +72,6 @@ Les autres APIs
 - http://www.w3.org/TR/
 
 Notes :
-
 
 
 
@@ -103,7 +99,6 @@ Les frameworks
 		- Processing
 
 Notes :
-
 
 
 

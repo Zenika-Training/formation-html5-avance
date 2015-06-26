@@ -16,7 +16,6 @@ Notes :
 
 
 
-
 ## Plan
 
 <!-- .slide: id="master-toc" class="toc" -->
@@ -32,7 +31,6 @@ Notes :
 - [Conclusion](#/9)
 
 Notes :
-
 
 
 

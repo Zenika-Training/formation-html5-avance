@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Server Sent Events
 
 - Spécification connue aussi sous le nom de EventSource
@@ -39,7 +38,6 @@ Notes :
 	- Monitoring de serveur
 
 Notes :
-
 
 
 
@@ -63,7 +61,6 @@ interface MessageEvent : Event {
 ```
 
 Notes :
-
 
 
 
@@ -99,7 +96,6 @@ Notes :
 
 
 
-
 ## EventSource
 
 Coté client
@@ -128,7 +124,6 @@ Accept:text/event-stream
 ```
 
 Notes :
-
 
 
 
@@ -162,7 +157,6 @@ Notes :
 
 
 
-
 ## EventSource
 
 Event stream
@@ -193,7 +187,6 @@ Notes :
 
 
 
-
 ## EventSource
 
 Event stream
@@ -214,7 +207,6 @@ data: {"title": "last new", "article": "..."}
 ```
 
 Notes :
-
 
 
 
@@ -249,7 +241,6 @@ Notes :
 
 
 
-
 ## EventSource
 
 Exemple PHP
@@ -277,7 +268,6 @@ sendMsg($serverTime, 'server time: ' . date("h:i:s", time()));
 ```
 
 Notes :
-
 
 
 
@@ -311,7 +301,6 @@ Notes :
 
 
 
-
 ## SSE et CORS
 
 - Le CORS n'est pas supporté pour le SSE d'après les standards
@@ -319,7 +308,6 @@ Notes :
 - Cela devrait devenir un standard prochainement
 
 Notes :
-
 
 
 
@@ -342,7 +330,6 @@ if (!!window.EventSource) {
 ```
 
 Notes :
-
 
 
 

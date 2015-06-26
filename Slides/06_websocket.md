@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Plan
 
 - Le protocole
@@ -32,7 +31,6 @@ Notes :
 - Sécurité
 
 Notes :
-
 
 
 
@@ -48,7 +46,6 @@ Notes :
 	- Transfert de données
 
 Notes :
-
 
 
 
@@ -81,7 +78,6 @@ Notes :
 
 
 
-
 ## Le protocole websocket
 
 - Suite au handshake, le protocole websocket est établi et l'échange de données peut commencer
@@ -94,7 +90,6 @@ Notes :
 → assure la sécurité des échange
 
 Notes :
-
 
 
 
@@ -114,7 +109,6 @@ Data exchange
 ```
 
 Notes :
-
 
 
 
@@ -145,7 +139,6 @@ WebSocket implements EventTarget;
 ```
 
 Notes :
-
 
 
 
@@ -185,7 +178,6 @@ Notes :
 
 
 
-
 ## L'API
 
 - Etat de la connexion
@@ -198,7 +190,6 @@ Notes :
 	- Chiffrement TLS/SSL similaire à HTTPS
 
 Notes :
-
 
 
 
@@ -230,7 +221,6 @@ Notes :
 
 
 
-
 ## Implémentations
 
 Serveurs
@@ -244,7 +234,6 @@ Serveurs
 	- Kaazing
 
 Notes :
-
 
 
 
@@ -277,7 +266,6 @@ Notes :
 
 
 
-
 ## Application
 
 Chat avec nodejs et websocket
@@ -305,7 +293,6 @@ wsServer.on('request', function(request) {
 ```
 
 Notes :
-
 
 
 
@@ -346,7 +333,6 @@ Notes :
 
 
 
-
 ## Sécurité et fallback
 
 - Sécurité basée sur les origines
@@ -359,7 +345,6 @@ Notes :
 	- Vers du polling/long-polling si la connexion ne peut être établie
 
 Notes :
-
 
 
 

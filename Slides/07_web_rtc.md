@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Plan
 
 - Introduction
@@ -38,7 +37,6 @@ Notes :
 - Conclusion
 
 Notes :
-
 
 
 
@@ -61,7 +59,6 @@ Notes :
 
 
 
-
 ## Support
 
 - Compatibilité
@@ -69,7 +66,6 @@ Notes :
 ![](ressources/images/07_web_rtc-10000201000003B1000001AD4F7938EB.png)
 
 Notes :
-
 
 
 
@@ -89,7 +85,6 @@ Notes :
 
 
 
-
 ## Acronymes et notations
 
 - SDP : Session Description Protocol
@@ -106,7 +101,6 @@ Notes :
 
 
 
-
 ## Architecture et Fonctionnement
 
 ![](ressources/images/07_web_rtc-10000201000003420000020811EAE053.png)
@@ -115,7 +109,6 @@ Notes :
 Signal Channel
 
 Notes :
-
 
 
 
@@ -130,7 +123,6 @@ Notes :
 
 
 
-
 ## Architecture et Fonctionnement
 
 - Cette API n'est pas déconnectée d'internet ou de toute forme de serveurs
@@ -142,13 +134,11 @@ Notes :
 
 
 
-
 ## Architecture et Fonctionnement
 
 ![](ressources/images/07_web_rtc-10000201000002E4000001E2EC5DB31F.png)
 
 Notes :
-
 
 
 
@@ -167,7 +157,6 @@ Notes :
 
 
 
-
 ## Architecture et Fonctionnement
 
 - L'API ne gère pas que l'audio et la vidéo. On peut aussi envoyer des données binaires grâce à RTCDataChannel :
@@ -178,7 +167,6 @@ Notes :
 	- Utilisable avec ou sans l'audio/vidéo
 
 Notes :
-
 
 
 
@@ -205,7 +193,6 @@ Notes :
 
 
 
-
 ## L'API : Créer une connexion
 
 - DtlsSrtpKeyAgreement : interopérabilité Chrome / Firefox
@@ -229,7 +216,6 @@ optional: [
 ```
 
 Notes :
-
 
 
 
@@ -263,13 +249,11 @@ Notes :
 
 
 
-
 ## L'API : Initialisation d'une connexion
 
 ![](ressources/images/07_web_rtc-10000000000002810000022F36214E1C.png)
 
 Notes :
-
 
 
 
@@ -299,7 +283,6 @@ Notes :
 
 
 
-
 ## L'API : Création d'une Answer
 
 - Lorsque le destinataire reçoit l'offer, il doit la définir comme RemoteDescription puis renvoyer une Answer pour compléter la mise en relation, en se l'assignant comme LocalDescription :
@@ -325,7 +308,6 @@ Notes :
 
 
 
-
 ## L'API : Ouverture de la connexion
 
 - A la réception de l'answer par le Peer 1, celui-ci se l'assigne en tant que RemoteDescription pour compléter la description de la connexion qui lie les 2 Peers
@@ -345,7 +327,6 @@ Notes :
 
 
 
-
 ## L'API : Recherche d'ICE
 
 ![](ressources/images/07_web_rtc-10000000000001E000000320A766E3A0.png)
@@ -356,7 +337,6 @@ Notes :
 - Le navigateur crée ensuite des candidats ICE pour notre connexion
 
 Notes :
-
 
 
 
@@ -374,7 +354,6 @@ pc.addIceCandidate(new RTCIceCandidate(e.candidate));
 ```
 
 Notes :
-
 
 
 
@@ -401,7 +380,6 @@ Notes :
 
 
 
-
 ## L'API : échanger des données
 
 - Pour envoyer les données, on utiliser la méthode send, comme pour l'API WebSockets
@@ -421,7 +399,6 @@ Notes :
 
 
 
-
 ## L'API : échanger des données
 
 - channelName est une string identifiant le datachannel et ne doit pas contenir d’espace, sinon chrome échouera
@@ -430,7 +407,6 @@ Notes :
 - RTCDataChannel peut être plus puissant que les WS pour échanger de la donnée car il n'y a aucun intermédiaire.
 
 Notes :
-
 
 
 
@@ -453,7 +429,6 @@ Notes :
 - L'API DataChannel ressemble volontairement beaucoup à l'API WebSocket :
 
 Notes :
-
 
 
 
@@ -486,7 +461,6 @@ Notes :
 
 
 
-
 ## L'API : Audio et Vidéo
 
 - Selon le navigateur, URL.createObjectURL n'est pas forcément nécessaire et le stream peut être affecté directement au src.
@@ -514,7 +488,6 @@ Notes :
 
 
 
-
 ## L'API : Audio et Vidéo
 
 - getUserMedia récupère le flux audio/vidéo. Il prend en paramètres des contraintes et 2 callbacks : succès et erreur
@@ -535,7 +508,6 @@ Notes :
 
 
 
-
 ## L'API : Audio et Vidéo
 
 - Le flux peut également être utilisé par l'API Web Audio, le Canvas, WebGL...
@@ -549,7 +521,6 @@ Notes :
 
 
 
-
 ## L'API : Audio et Vidéo
 
 - La caméra et le micro ne peuvent pas être utilisés sans l'accord explicite de l'utilisateur
@@ -560,7 +531,6 @@ Notes :
 ![](ressources/images/07_web_rtc-10000201000006FC0000032139375464.png)
 
 Notes :
-
 
 
 
@@ -589,7 +559,6 @@ Notes :
 
 
 
-
 ## Sécurité
 
 - Chiffrement des données et flux audio/vidéo par le navigateur
@@ -599,7 +568,6 @@ Notes :
 - Encore beaucoup de discussionsDiscussion complète : http://www.ietf.org/proceedings/82/slides/rtcweb-13.pdf
 
 Notes :
-
 
 
 
@@ -620,7 +588,6 @@ Notes :
 
 
 
-
 ## Limitations et Interopérabilité
 
 - Firefox :
@@ -633,7 +600,6 @@ Notes :
 
 
 
-
 ## Extensions et nouvelles API
 
 - API Web Audio : Accès au micro
@@ -643,7 +609,6 @@ Notes :
 		- Multipoint Control Unit
 
 Notes :
-
 
 
 
@@ -663,7 +628,6 @@ Notes :
 
 
 
-
 ## Outils et ressources : webrtc-internals
 
 ![](ressources/images/07_web_rtc-10000201000003F20000031A8872338A.png)
@@ -672,13 +636,11 @@ Notes :
 
 
 
-
 ## Outils et ressources : webrtc-internals
 
 ![](ressources/images/07_web_rtc-1000020100000500000002DA9EF222A9.png)
 
 Notes :
-
 
 
 
@@ -698,7 +660,6 @@ Notes :
 
 
 
-
 ## Exemples d'utilisation
 
 - https://apprtc.appspot.com : simple démo audio + vidéo
@@ -709,7 +670,6 @@ Notes :
 - https://www.cubeslam.com/ : jeu HTML5 avec communication par datachannels
 
 Notes :
-
 
 
 

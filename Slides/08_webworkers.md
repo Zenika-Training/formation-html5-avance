@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Plan
 
 - La multi threading en Javascript
@@ -35,7 +34,6 @@ Notes :
 - Shared Web Worker
 
 Notes :
-
 
 
 
@@ -55,7 +53,6 @@ Notes :
 
 
 
-
 ## La multi threading en Javascript
 
 - Permet de garder l'IHM performante et utilisable par l'utilisateur
@@ -66,7 +63,6 @@ Notes :
 ![](ressources/images/08_webworkers-10000000000001C200000064EF050494.png)
 
 Notes :
-
 
 
 
@@ -100,7 +96,6 @@ Notes :
 
 
 
-
 ## Pour commencer
 
 - Le worker scope
@@ -128,7 +123,6 @@ Notes :
 
 
 
-
 ## Limitation
 
 - Les workers, à cause de leur comportement multi-thread, ont un accès limité aux fonctionnalités javascript
@@ -146,7 +140,6 @@ Notes :
 	- Au cache de l'application
 
 Notes :
-
 
 
 
@@ -170,7 +163,6 @@ worker.postMessage(""); // envoi de message au worker
 ```
 
 Notes :
-
 
 
 
@@ -200,7 +192,6 @@ Notes :
 
 
 
-
 ## Exemple
 
 - La page principale
@@ -227,7 +218,6 @@ Notes :
 
 
 
-
 ## Exemple
 
 - `worker.js`
@@ -245,7 +235,6 @@ postMessage(n);
 }```
 
 Notes :
-
 
 
 
@@ -273,7 +262,6 @@ Notes :
 
 
 
-
 ## SubWorkers
 
 - On peut lancer des SubWorkers depuis les Workers
@@ -283,7 +271,6 @@ Notes :
 - Attention : ne pas oublier que les messages sont copiés et non pas partagés. Il ne faut donc pas créer une multitude de workers, cela pourrait demander trop de ressources clientes.
 
 Notes :
-
 
 
 
@@ -311,7 +298,6 @@ Notes :
 
 
 
-
 ## Shared Web Worker
 
 - Le worker en javascript
@@ -335,7 +321,6 @@ Notes :
 
 
 
-
 ## Cas d'utilisation
 
 - Quelques cas d'utilisation possibles pour les workers :
@@ -348,7 +333,6 @@ Notes :
 	- Faire des opérations sur la base de donnée cliente
 
 Notes :
-
 
 
 
@@ -372,7 +356,6 @@ console.log("Votre navigateur ne supporte pas les shared workers");
 ```
 
 Notes :
-
 
 
 

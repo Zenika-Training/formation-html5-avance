@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Plan
 
 - Rappels sur l'API standard
@@ -35,7 +34,6 @@ Notes :
 - Sécurité avec les credentials
 
 Notes :
-
 
 
 
@@ -52,7 +50,6 @@ Notes :
 	- Envoi de formulaire
 
 Notes :
-
 
 
 
@@ -89,7 +86,6 @@ Notes :
 
 
 
-
 ## L'API XMLHttpRequest
 
 Limitations
@@ -108,7 +104,6 @@ Notes :
 
 
 
-
 ## Les nouveautés du Level 2
 
 - Meilleure gestion des données
@@ -119,7 +114,6 @@ Notes :
 - Spécification : http://www.w3.org/TR/XMLHttpRequest/
 
 Notes :
-
 
 
 
@@ -138,7 +132,6 @@ xhr.send(msg);
 ```
 
 Notes :
-
 
 
 
@@ -170,7 +163,6 @@ Notes :
 
 
 
-
 ## Meilleure gestion des données
 
 FormData
@@ -197,7 +189,6 @@ Notes :
 
 
 
-
 ## Meilleure gestion des données
 
 FormData
@@ -221,7 +212,6 @@ Cache-Control: no-cache
 ```
 
 Notes :
-
 
 
 
@@ -259,7 +249,6 @@ Notes :
 
 
 
-
 ## Transfert de fichier
 
 Download
@@ -286,7 +275,6 @@ blob:http://localhost/c745ef73-ece9-46da-8f66-ebes574789b1
 ```
 
 Notes :
-
 
 
 
@@ -323,7 +311,6 @@ Notes :
 
 
 
-
 ## Transfert de fichier
 
 Download
@@ -354,7 +341,6 @@ xhr.send();
 ```
 
 Notes :
-
 
 
 
@@ -390,7 +376,6 @@ Notes :
 
 
 
-
 ## Transfert de fichier
 
 Upload
@@ -412,7 +397,6 @@ Notes :
 
 
 
-
 ## ProgressEvent Interface
 
 |attribute|type|Explanation|
@@ -428,7 +412,6 @@ Notes :
 ![](ressources/images/03_xmlhttprequest-TablePreview1.svm)
 
 Notes :
-
 
 
 
@@ -453,7 +436,6 @@ progressBar.textContent = progressBar.value;
 ```
 
 Notes :
-
 
 
 
@@ -484,7 +466,6 @@ Notes :
 
 
 
-
 ## Cross Origin Resource Sharing (CORS)
 
 - La précédente version du XHR limitait les requêtes aux mêmes origines : protocoles (http, https), nom de domaine et port
@@ -512,7 +493,6 @@ Notes :
 
 
 
-
 ## Cross Origin Resource Sharing (CORS)
 
 - Exemple serveur php
@@ -531,7 +511,6 @@ Notes :
 
 
 
-
 ## CORS with credentials
 
 - Par défaut CORS n'envoie pas les « user credentials »
@@ -547,7 +526,6 @@ Notes :
 - Access-Control-Allow-Credentials header doit être « true »
 
 Notes :
-
 
 
 
@@ -576,7 +554,6 @@ if (typeof xhr.withCredentials === undefined &&
 ```
 
 Notes :
-
 
 
 

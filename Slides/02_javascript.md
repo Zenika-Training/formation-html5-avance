@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## Closure (Principe)
 
 - Pour rappel, une variable a une certaine portée de visibilité, appelée scope.
@@ -38,7 +37,6 @@ console.log(x); //undefined
 ```
 
 Notes :
-
 
 
 
@@ -66,7 +64,6 @@ Notes :
 
 
 
-
 ## Héritage / Prototype
 
 - Javascript est un langage par prototype, permettant une approche orientée objet
@@ -85,7 +82,6 @@ olivier.sayHey() ; // hey !
 ```
 
 Notes :
-
 
 
 
@@ -112,7 +108,6 @@ Notes :
 
 
 
-
 ## Héritage / Prototype
 
 - En revanche, il est possible d'effectuer des modifications globales
@@ -135,7 +130,6 @@ Notes :
 
 
 
-
 ## Object Literals
 
 - Cette notation permet de déclarer des objets d'une manière élégante
@@ -151,7 +145,6 @@ voiture.annee; //1989
 ```
 
 Notes :
-
 
 
 

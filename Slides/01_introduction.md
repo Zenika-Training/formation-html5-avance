@@ -22,7 +22,6 @@ Notes :
 
 
 
-
 ## HTML5 c'est ...
 
 - De nouvelles balises
@@ -45,7 +44,6 @@ Notes :
 
 
 
-
 ## Mais aussi ...
 
 - Les APIs « avancées »
@@ -59,7 +57,6 @@ Notes :
 	- Scripts asynchrones ou les web workers
 
 Notes :
-
 
 
 
@@ -77,7 +74,6 @@ Notes :
 
 
 
-
 ## Web messaging
 
 - Envoi de messages entre fenêtres, onglets et de contenu de différentes origines
@@ -87,7 +83,6 @@ http://www.codeproject.com/Articles/248264/HTML5-WebMessaging-Experiment
 ![](ressources/images/01_introduction-10000000000002370000017D9C7AD454.png)
 
 Notes :
-
 
 
 
@@ -107,7 +102,6 @@ Notes :
 
 
 
-
 ## WebSocket
 
 - Protocole et API de communication temps-réel
@@ -123,7 +117,6 @@ Notes :
 
 
 
-
 ## WebRTC
 
 - API de communication temps-réel, peer to peer
@@ -132,7 +125,6 @@ Notes :
 ![](ressources/images/01_introduction-1000000000000190000000E1BC4FFAF0.png)
 
 Notes :
-
 
 
 
@@ -149,7 +141,6 @@ Notes :
 
 
 
-
 ## Ressources
 
 - Lire les spécifications :
@@ -160,7 +151,6 @@ Notes :
 	- www.html5test.com
 
 Notes :
-
 
 
 

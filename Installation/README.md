@@ -1,2 +1,2 @@
-Ajouter ici les ressources et instructions pour tout ce qui nécessite d'être installé pour les TPs ou Démos
+Ajouter ici les ressources et instructions pour tout ce qui nÃ©cessite d'Ãªtre installÃ© pour les TPs ou DÃ©mos
 

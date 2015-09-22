@@ -76,19 +76,19 @@ Notes :
 - Pour arrêter un Worker
   - Ou depuis le script du worker
 
-```
+```javascript
 var worker = new Worker('task.js');
 ```
 
-```
+```javascript
 worker.postMessage();
 ```
 
-```
+```javascript
 worker.terminate();
 ```
 
-```
+```javascript
 self.close();
 ```
 
@@ -106,13 +106,13 @@ Notes :
 - Chargement de scripts externes depuis le worker avec la fonction importScripts
 - Peut servir pour mutualiser du code appelé depuis le worker
 
-```
+```javascript
 postMessage();
 //est équivalent à
 self.postMessage();
 ```
 
-```
+```javascript
 importScripts('script1.js');
 importScripts('script2.js');
 //ou
@@ -149,7 +149,7 @@ Notes :
 
 - L'événement sera appelé quand le worker appellera son propre `postMessage()`
 
-```
+```html
 //dans la page html
 <s cript>
 var worker = new Worker('worker.js');
@@ -172,19 +172,16 @@ Notes :
 
 - On peut aussi envoyer des messages au format JSON
 
-```
+```javascript
 //worker.js
 
 postMessage("Je suis le Worker");
-
 onmessage = function(event) {
-
-postMessage('Hi '+event.data);
-
+  postMessage('Hi '+event.data);
 };
 ```
 
-```
+```javascript
 worker.postMessage({'cmd': 'stop', 'msg': 'Bye'});
 ```
 
@@ -232,7 +229,8 @@ search: while (true) {
   continue search;
   // found a prime!
   postMessage(n);
-}```
+}
+```
 
 Notes :
 
@@ -248,7 +246,7 @@ Notes :
 
 ```javascript
 function onError(e) {
-  document.getElementById('error').textContent = 
+  document.getElementById('error').textContent =
     ['ERROR: Line ', e.lineno, ' in ', e.filename, ': ', e.message]
     .join('');
 }

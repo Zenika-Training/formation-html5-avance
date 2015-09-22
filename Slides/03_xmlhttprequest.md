@@ -387,7 +387,8 @@ function sendArrayBuffer() {
     var uInt8Array = new Uint8Array([1, 2, 3]);
 
     xhr.send(uInt8Array.buffer);
-}```
+}
+```
 
 Notes :
 
@@ -405,7 +406,7 @@ Notes :
 | `ontimeout`   | `timeout`   | When the author specified timeout has passed before the request could complete. |
 | `onloadend`   | `loadend`   | When the request has completed, regardless of whether or not it was successful. |
 
-![](ressources/images/03_xmlhttprequest-TablePreview1.svm)
+![](ressources/images/03_xmlhttprequest-TablePreview1.svg)
 
 Notes :
 

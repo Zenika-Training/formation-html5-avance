@@ -244,7 +244,8 @@ RTCPeerConnection {
   createOffer: Function
   setLocalDescription: Function
   setRemoteDescription: Function
-}```
+}
+```
 
 Notes :
 
@@ -426,7 +427,7 @@ Notes :
 | Compression         | non          | non          |
 | Relais              | serveur      | P2P          |
 
-![](ressources/images/07_web_rtc-TablePreview1.svm)
+![](ressources/images/07_web_rtc-TablePreview1.svg)
 
 - L'API DataChannel ressemble volontairement beaucoup à l'API WebSocket :
 
@@ -467,11 +468,12 @@ Notes :
 
 - Selon le navigateur, URL.createObjectURL n'est pas forcément nécessaire et le stream peut être affecté directement au src.
 
-```
+```html
 // Peer 1
 // Dans la page HTML
 <video id="mediaViewer" autoplay></video>
-
+```
+```javascript
 // Dans le javascript
 var video = document.getElementById("mediaViewer");
 

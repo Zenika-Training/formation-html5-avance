@@ -7,9 +7,9 @@ Documentation du [framework](https://github.com/Zenika/Formation--Framework)
 
 Les supports peuvent être obtenus à ces adresses :
 
-Version release : https://zen-formation-modele.appspot.com/ [![Circle CI](https://circleci.com/gh/Zenika/formation-html5-avance/tree/release.svg?style=svg&circle-token=2db9d589c3e04a16ec90df263f003eec7cf11eed)](https://circleci.com/gh/Zenika/formation-html5-avance/tree/release)
+Version release : https://zen-formation-html5-avance.appspot.com/ [![Circle CI](https://circleci.com/gh/Zenika/formation-html5-avance/tree/release.svg?style=svg&circle-token=2db9d589c3e04a16ec90df263f003eec7cf11eed)](https://circleci.com/gh/Zenika/formation-html5-avance/tree/release)
 
-Version courante : https://master-dot-zen-formation-modele.appspot.com/ [![Circle CI](https://circleci.com/gh/Zenika/formation-html5-avance/tree/master.svg?style=svg&circle-token=2db9d589c3e04a16ec90df263f003eec7cf11eed)](https://circleci.com/gh/Zenika/formation-html5-avance/tree/master)
+Version courante : https://master-dot-zen-formation-html5-avance.appspot.com/ [![Circle CI](https://circleci.com/gh/Zenika/formation-html5-avance/tree/master.svg?style=svg&circle-token=2db9d589c3e04a16ec90df263f003eec7cf11eed)](https://circleci.com/gh/Zenika/formation-html5-avance/tree/master)
 
 # Organisation
 

@@ -17,10 +17,13 @@ Le code de cet exercice est réparti entre la page `inscription.html` et le scri
 
 ### Préparation
 
-Pour lancer le serveur basé sur Node.js, ouvrez une console dans le répertoire `server` et lancez la commande suivante :
+- Installer Node.js fournit par le formateur ou via le lien suivant : https://nodejs.org
+- Ouvrez une console dans le répertoire `server`
+- Lancez la commande suivante : `npm install`
+- puis :
 
 ```shell
-node server_file.js
+npm run file
 ```
 
 ### Upload
@@ -109,7 +112,7 @@ Nous allons faire en sorte que, lorsque notre page d'inscription est ouverte dep
 Pour lancer le serveur `partenaire` basé sur Node.js, ouvrez une console dans le répertoire `server` et lancez la commande suivante :
 
 ```shell
-node partner_server.js
+npm run partner
 ```
 
 Vérifiez que la page partenaire s'ouvre correctement à l'adresse `http://localhost:8081`.
@@ -238,7 +241,7 @@ Rappel : les ID des conférences vont de 1 à 12
 Pour lancer le serveur compatible WebSockets basé sur Node.js, ouvrez une console dans le répertoire `server` et lancez la commande suivante :
 
 ```javascript
-node ws_server.js
+npm run ws
 ```
 
 Notez que nous aurons toujours besoin du serveur `server_file.js` pour faire fonctionner la partie cliente de l'application.
@@ -312,7 +315,7 @@ Suivre les TODO numérotés pour effectuer les éléments dans le bon ordre.
 Pour lancer le serveur servant pour le signal channel, ouvrez une console dans le répertoire `server` et lancez la commande suivante :
 
 ```javascript
-node signaling-server.js
+npm run signaling
 ```
 
 ### Communication audio et vidéo

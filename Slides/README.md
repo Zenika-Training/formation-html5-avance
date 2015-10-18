@@ -14,7 +14,7 @@ Il y a 2 types de fichiers. D'une part, `slides.json` permet d'indiquer les chap
 
 Pour modifier la liste de fichiers chargés, éditer `slides.json`. Ce fichier contient une liste des chemins des fichiers markdown à inclure. Le chemin doit être relatif au fichier `slides.json`, lui même devant être situé à la racine du répertoire `Slides`.
 
-Exemple: 
+Exemple :
 
 ```json
 [
@@ -89,9 +89,11 @@ Les pages de TP n'ont pas de titre, il suffit d'utiliser la classe correspondant
 
 - Pour le code inline, utiliser la syntaxe Markdown classique, et pour les blocs de code, utiliser les blocs GFM avec spécification du langage.
 
-<!-- Utilisation de <br/> ici car les balises pre et code perturbent la coloration syntaxique Markdown Extended de Sublime Text si elles s'ouvrent et se ferment sur deux lignes différentes. -->
-
-<pre><code>```javascript<br/>function(arg) { return 'du javascript en couleur !'; }<br/>```</code></pre>
+<pre><code>
+```javascript
+function(arg) { return 'du javascript en couleur !'; }
+```
+</code></pre>
 
 - Il n'y a pas de retour à la ligne automatique dans les blocs de code, il faut donc vérifier que les lignes rentrent bien dans la largeur de la slide.
 - Si une ligne de code commence par une suite continue d'espaces trop longue, la ligne est mise à la ligne. Il est donc nécessaire d'indenter avec 2 espaces seulement.
@@ -101,10 +103,10 @@ Les pages de TP n'ont pas de titre, il suffit d'utiliser la classe correspondant
 - Pour les images, écrire du HTML classique. La taille peut être modifié via l'attribut `width`, et la position en modifiant les marges. La classe `.with-border` active une fine bordure noire autour de l'image.
 
 ```html
-<img 
-  src="ressources/image.png" 
-  alt="Une image" 
-  width="90%" 
+<img
+  src="ressources/image.png"
+  alt="Une image"
+  width="90%"
   style="margin-top: 10%"
   class="with-border"/>
 ```
@@ -113,8 +115,8 @@ Les pages de TP n'ont pas de titre, il suffit d'utiliser la classe correspondant
 
 ```html
 <figure>
-    <img 
-      src="ressources/image.png" 
+    <img
+      src="ressources/image.png"
       alt="Une image"/>
     <figcaption>Une superbe représentation de quelque chose</figcaption>
 </figure>
@@ -135,6 +137,7 @@ On peut indiquer que des éléments de slides ne doivent être révélés qu'au 
 Si besoin, on peut ajouter des attibuts HTML à la slide en cours où à un élément grâce aux syntaxes `<!-- .slide: ... -->` et `<!-- .element: ... -->`. Cela peut être utile pour donner un style particulier à un élément, par exemple pour le positionner.
 
 #### Divers
+
 D'autres exemples peuvent être trouvés directement dans les slides modèle.
 
 # Consulter les slides
@@ -149,24 +152,25 @@ D'autres exemples peuvent être trouvés directement dans les slides modèle.
 - Si le port 8000 pose un problème sur votre machine, vous pouvez choisir le port en rajoutant l'option `--port=9999`
 
 ## Lancement avec Docker
+
 - Aller à la racine de la formation
 - Lancer le serveur avec docker `docker run -it -v $PWD:/data --net=host --rm dockerfile/nodejs-bower-grunt grunt`
 - Aller à `http://localhost:8000`
 
 En cas de problème de démarrage du serveur, vous pouvez rétablir une situation normale en copiant le contenu du fichier .md dans le fichier html, en ajoutant une balise `<script>`, comme suit :
 
-Remplacer 
+Remplacer
 ```html
 <!-- Slides will be inserted here -->
 ```
 
-Par 
+Par
 ```html
-<section 
-  data-markdown="00_agenda.md" 
+<section
+  data-markdown="00_agenda.md"
   data-vertical="^\r?\n\r?\n\r?\n"
   data-notes="^Notes :">
-  <script type="text/template"> 
+  <script type="text/template">
     # Titre de la formation
 
     ...
@@ -174,6 +178,7 @@ Par
 </section>
 ```
 *Note : * Les modifications dans les fichiers des chapitres (`*.md`), dans `slides.json`, ainsi que dans les ressources sont prises en compte à chaud si le serveur a été lancé avec `grunt`.
+
 ## Navigation
 
 - Espace permet d'aller au slide suivant

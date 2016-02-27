@@ -1,4 +1,4 @@
-Domaine: [Java, DevOps, Agilité, BigData, Web & Mobilité, NoSQL, Craftsmanship]
+Domaine: [Java & Architecture, DevOps, Agilité, BigData & NoSQL, Web, Craftsmanship, IoT & Mobilité]
 
 Sous-domaine: ?
 
@@ -7,6 +7,8 @@ Sous-domaine: ?
 ## Sous-titre
 
 Durée: ?j
+
+Prix: ?€
 
 ## Présentation
 

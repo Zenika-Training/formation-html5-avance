@@ -3,6 +3,6 @@ node_modules
 PDF
 dist
 .DS_Store
-.iml
 /build
+*.iml
 npm-debug.log

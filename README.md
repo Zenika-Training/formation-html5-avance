@@ -68,12 +68,6 @@ Pour générer les `.pdf` des slides :
 grunt pdf
 ```
 
-Si vous utiliser NPM3, utiliser la commande :
-
-```shell
-gulp
-```
-
 
 ## Utilisation avec Docker
 

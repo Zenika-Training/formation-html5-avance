@@ -12,7 +12,7 @@
   "dependencies": {
     "grunt": "^0.4.5",
     "gulp": "^3.9.0",
-    "zenika-formation-framework": "git+https://github.com/Zenika/Zenika/zenika-formation-framework.git#tags/0.4.7"
+    "zenika-formation-framework": "git+https://github.com/Zenika/zenika-formation-framework.git#tags/0.4.7"
   },
   "config": {
     "deploy": {
